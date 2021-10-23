@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   rules: {
+    "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
     "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
     "import/prefer-default-export": "off",
@@ -26,6 +27,7 @@ module.exports = {
     "react/jsx-one-expression-per-line": "off",
     "global-require": "off",
     "react-native/no-raw-text": "off",
+    "constistent-return": "off",
     "no-param-reassign": "off",
     "no-underscore-dangle": "off",
     "eslint-disable-next-line": "off",

@@ -1,9 +1,16 @@
 import React from 'react';
 
-// import { Container } from './styles';
+// CUSTOM IMPORTS
+import { Container } from './styles';
+import { Typography, Button } from '../../components/atoms';
 
 function Home() {
-  return <h1>Home</h1>;
+  return (
+    <Container>
+      <Typography variant="title">Home</Typography>
+      <Button>Button</Button>
+    </Container>
+  );
 }
 
 export default Home;
