@@ -1,20 +1,17 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 
 // CUSTOM IMPORTS
-import Route from './Route';
-// PUBLIC URLS
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
+import Home from '../pages/Home';
 
 export default function Routes() {
   return (
+    <BrowserRouter>
     <Switch>
-      {/* PUBLIC ROUTES */}
-      <Route path="/" exact component={SignIn} />
-      <Route path="/signUp" exact component={SignUp} />
-
+      <Route path="/Home" exact component={Home} />
       <Route path="/" component={() => <h1>404! PAGE NOT FOUND</h1>} />
     </Switch>
+    </BrowserRouter>
   );
 }
