@@ -1,14 +1,55 @@
 import React from 'react';
 
 // CUSTOM IMPORTS
+import { Formik, Form } from 'formik';
 import { Container } from './styles';
-import { Typography, Button } from '../../components/atoms';
+import { Typography, Input, Button } from '../../components/atoms';
+import YoutubeEmbed from '../../utils/YoutubeEmbed';
 
 function Home() {
   return (
     <Container>
-      <Typography variant="title">Home</Typography>
-      <Button>Button</Button>
+      <div style={{ display: 'row' }}>
+        <Typography
+          variant="title"
+          style={{
+            textAlign: 'center',
+            textDecoration: 'underline',
+            fontWeight: 'bold',
+            marginBottom: '24px',
+          }}
+        >
+          Assista ao vídeo
+        </Typography>
+        <YoutubeEmbed embedId="GqyAyIDXwoc" />
+        <Formik
+          initialValues={{
+            name: '',
+            email: '',
+          }}
+          onSubmit={values => {
+            alert(JSON.stringify(values, null, 2));
+          }}
+        >
+          <Form>
+            <Input
+              type="name"
+              name="name"
+              placeholder="Insira seu nome"
+              label="Nome"
+            />
+
+            <Input
+              type="email"
+              name="email"
+              placeholder="Insira seu email"
+              label="Email"
+            />
+
+            <Button type="submit">Submit</Button>
+          </Form>
+        </Formik>
+      </div>
     </Container>
   );
 }

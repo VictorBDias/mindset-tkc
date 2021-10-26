@@ -1,13 +1,19 @@
 {
-  "name": "reactjs-template",
+  "name": "mindset-tkc",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/gatsby-plugin": "^2.0.1",
+    "@chakra-ui/react": "^1.6.10",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.13.0",
     "babel-plugin-root-import": "^6.4.1",
     "customize-cra": "^0.8.0",
     "dotenv": "^8.2.0",
+    "formik": "^2.2.9",
+    "framer-motion": "^4",
     "global": "^4.4.0",
     "history": "^4.10.1",
     "immer": "^4.0.1",
@@ -29,7 +35,8 @@
     "redux": "^4.0.4",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.1",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.4",

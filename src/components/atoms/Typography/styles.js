@@ -24,20 +24,26 @@ export const Paragraph = styled.p`
       case 'title':
         return css`
           font-size: 24px;
-          color: #484b4d;
+          color: #141414;
+          font-weight: bold;
+        `;
+      case 'whiteTitle':
+        return css`
+          font-size: 32px;
+          color: #fafafa;
           font-weight: bold;
         `;
 
       case 'subTitle':
         return css`
           font-size: 16px;
-          color: #4c4f51;
+          color: #141414;
           font-weight: bold;
         `;
       case 'regular':
         return css`
           font-size: 16px;
-          color: #4c4f51;
+          color: #141414;
           font-weight: regular;
         `;
 

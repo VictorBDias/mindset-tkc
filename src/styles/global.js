@@ -23,6 +23,8 @@ export default createGlobalStyle`
     height: 100%;
     background: none;
     background-size: cover;
+    background-color: #F1F1F1;
+
   }
 
   body {
