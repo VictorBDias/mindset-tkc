@@ -15,10 +15,13 @@ function Input({ label, placeholder, ...rest }) {
 }
 
 Input.propTypes = {
-  label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
-Input.defaultProps = {};
+Input.defaultProps = {
+  label: null,
+  placeholder: null,
+};
 
 export { Input };

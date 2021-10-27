@@ -1,12 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 // CUSTOM IMPORTS
 import { Container, Content } from './styles';
 import Logo from '../../../assets/defaultIcon.png';
 import { Typography } from '~/components/atoms';
 
-export default function Header({}) {
+export default function Header() {
   return (
     <Container>
       <Content>

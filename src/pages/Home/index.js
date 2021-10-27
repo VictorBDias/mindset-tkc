@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 // CUSTOM IMPORTS
 import { Formik, Form } from 'formik';
@@ -7,6 +8,8 @@ import { Typography, Input, Button } from '../../components/atoms';
 import YoutubeEmbed from '../../utils/YoutubeEmbed';
 
 function Home() {
+  const history = useHistory();
+
   return (
     <Container>
       <div style={{ display: 'row' }}>
@@ -24,30 +27,45 @@ function Home() {
         <YoutubeEmbed embedId="GqyAyIDXwoc" />
         <Formik
           initialValues={{
-            name: '',
-            email: '',
+            token: '',
           }}
-          onSubmit={values => {
-            alert(JSON.stringify(values, null, 2));
+          onSubmit={() => {
+            history.push('/instructions');
+            // alert(JSON.stringify(values, null, 2));
           }}
         >
-          <Form>
-            <Input
-              type="name"
-              name="name"
-              placeholder="Insira seu nome"
-              label="Nome"
-            />
-
-            <Input
-              type="email"
-              name="email"
-              placeholder="Insira seu email"
-              label="Email"
-            />
-
-            <Button type="submit">Submit</Button>
-          </Form>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignContent: 'center',
+            }}
+          >
+            <Form style={{ display: 'row' }}>
+              <Typography
+                variant="title"
+                style={{
+                  marginTop: '24px',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                }}
+              >
+                Insira seu token aqui!{' '}
+              </Typography>
+              <Input type="token" name="token" />
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                }}
+              >
+                <Button variant="solid" type="submit">
+                  <Typography variant="whiteRegular">Avançar</Typography>
+                </Button>
+              </div>
+            </Form>
+          </div>
         </Formik>
       </div>
     </Container>
