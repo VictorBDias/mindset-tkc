@@ -12,7 +12,13 @@ const typographyPropTypes = {
 
   className: PropTypes.string,
 
-  variant: PropTypes.oneOf(['regular', 'subTitle', 'title']),
+  variant: PropTypes.oneOf([
+    'regular',
+    'subTitle',
+    'title',
+    'whiteTitle',
+    'whiteRegular',
+  ]),
 };
 
 const typographyDefaultProps = {

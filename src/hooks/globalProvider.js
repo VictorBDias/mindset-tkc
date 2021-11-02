@@ -2,6 +2,7 @@ import React, { createContext, useContext } from 'react';
 
 //* CUSTOM IMPORTS
 import Header from '../components/templates/Header';
+import Footer from '../components/templates/Footer';
 
 const GlobalContext = createContext(null);
 
@@ -14,6 +15,7 @@ const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider value={{}}>
       <Header />
       {children}
+      <Footer />
     </GlobalContext.Provider>
   );
 };

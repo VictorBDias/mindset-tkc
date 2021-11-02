@@ -14,7 +14,8 @@ export default function Routes() {
         <ChakraProvider>
           <GlobalProvider>
             <Route path="/" exact component={Home} />
-            <Route path="/instructions" exact component={Instructions} />
+            <Route path="/instrucoes" exact component={Instructions} />
+            <Route path="/impulsores" exact component={Instructions} />
           </GlobalProvider>
         </ChakraProvider>
         {/* <Route path="/" component={() => <h1>404! PAGE NOT FOUND</h1>} /> */}

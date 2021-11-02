@@ -1,5 +1,4 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 // CUSTOM IMPORTS
 import { Formik, Form } from 'formik';
@@ -8,8 +7,7 @@ import { Typography, Input, Button } from '../../../components/atoms';
 import YoutubeEmbed from '../../../utils/YoutubeEmbed';
 import Map from '../../../assets/map.png';
 
-function Instructions() {
-  const history = useHistory();
+function Impulsores() {
   return (
     <Container>
       <div style={{ display: 'row' }}>
@@ -22,17 +20,15 @@ function Instructions() {
             marginBottom: '24px',
           }}
         >
-          Assista ao vídeo
+          Questionário Impulsores{' '}
         </Typography>
-        <YoutubeEmbed embedId="GqyAyIDXwoc" />
         <Formik
           initialValues={{
             name: '',
             email: '',
           }}
           onSubmit={values => {
-            history.push('/impulsores');
-            // alert(JSON.stringify(values, null, 2));
+            alert(JSON.stringify(values, null, 2));
           }}
         >
           <Form>
@@ -127,4 +123,4 @@ function Instructions() {
   );
 }
 
-export default Instructions;
+export default Impulsores;

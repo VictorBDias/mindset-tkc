@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
+    "react/forbid-prop-types": "off",
     "react/jsx-filename-extension": ["error", { extensions: [".js", ".jsx"] }],
     "import/prefer-default-export": "off",
     "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
