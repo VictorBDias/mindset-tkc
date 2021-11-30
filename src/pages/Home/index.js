@@ -30,7 +30,7 @@ function Home() {
             token: '',
           }}
           onSubmit={() => {
-            history.push('/instructions');
+            history.push('/instrucoes');
             // alert(JSON.stringify(values, null, 2));
           }}
         >

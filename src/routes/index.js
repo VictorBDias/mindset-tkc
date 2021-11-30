@@ -6,6 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { GlobalProvider } from '~/hooks/globalProvider';
 import Home from '../pages/Home';
 import Instructions from '../pages/TkcForm/instructions';
+import Impulsores from '../pages/TkcForm/Implulsores';
 
 export default function Routes() {
   return (
@@ -15,7 +16,7 @@ export default function Routes() {
           <GlobalProvider>
             <Route path="/" exact component={Home} />
             <Route path="/instrucoes" exact component={Instructions} />
-            <Route path="/impulsores" exact component={Instructions} />
+            <Route path="/impulsores" exact component={Impulsores} />
           </GlobalProvider>
         </ChakraProvider>
         {/* <Route path="/" component={() => <h1>404! PAGE NOT FOUND</h1>} /> */}

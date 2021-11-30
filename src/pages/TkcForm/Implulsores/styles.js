@@ -4,16 +4,9 @@ export const Container = styled.div`
   margin-top: 40px;
   display: flex;
   justify-content: center;
-`;
-
-export const LeftContainer = styled.div`
-  float: left;
-  width: 50%;
-  margin-bottom: 80px;
 
   table {
     border-collapse: collapse;
-    width: 400px;
   }
 
   td,
@@ -27,8 +20,14 @@ export const LeftContainer = styled.div`
   }
 `;
 
-export const RightContainer = styled.div`
-  margin-top: 40px;
-  float: left;
-  width: 50%;
+export const QuestionContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

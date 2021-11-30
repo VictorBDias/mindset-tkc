@@ -1,13 +1,25 @@
 import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
 
 // CUSTOM IMPORTS
-import { Formik, Form } from 'formik';
-import { Container, LeftContainer, RightContainer } from './styles';
-import { Typography, Input, Button } from '../../../components/atoms';
-import YoutubeEmbed from '../../../utils/YoutubeEmbed';
-import Map from '../../../assets/map.png';
+import { Container, QuestionContainer, ButtonsContainer } from './styles';
+import { Typography, InputBox, Button } from '../../../components/atoms';
+
+const default_value = { id: 1, value: 0, label: '0' };
+
+const options = [
+  { id: 1, value: 0, label: '0' },
+  { id: 2, value: 1, label: '1' },
+  { id: 3, value: 2, label: '2' },
+  { id: 4, value: 3, label: '3' },
+];
 
 function Impulsores() {
+  // STATES
+  const { control, handleSubmit } = useForm();
+
+  const onSubmit = data => console.log(data);
+
   return (
     <Container>
       <div style={{ display: 'row' }}>
@@ -22,102 +34,65 @@ function Impulsores() {
         >
           Questionário Impulsores{' '}
         </Typography>
-        <Formik
-          initialValues={{
-            name: '',
-            email: '',
-          }}
-          onSubmit={values => {
-            alert(JSON.stringify(values, null, 2));
-          }}
-        >
-          <Form>
-            <LeftContainer>
-              <Input
-                type="name"
-                name="name"
-                placeholder="Insira seu nome"
-                label="Nome"
-              />
 
-              <Input
-                type="email"
-                name="email"
-                placeholder="Insira seu email"
-                label="Email"
-              />
-              <table>
-                <tr>
-                  <th>
-                    <Typography
-                      variant="title"
-                      style={{
-                        textAlign: 'center',
-                        textDecoration: 'underline',
-                        fontWeight: 'bold',
-                      }}
-                    >
-                      Instruções
-                    </Typography>
-                  </th>
-                </tr>
-                <tr>
-                  <td>
-                    <Typography>
-                      Leia atentamente o cabeçalho dos questionários antes de
-                      iniciar o preenchimento das respostas.
-                    </Typography>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <Typography>
-                      Sua resposta precisa representar a sua opção como se de
-                      fato você estivesse nesta situação.
-                    </Typography>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <Typography>
-                      A sua sinceridade é que vai determinar o grau de exatidão
-                      do diagnóstico de mindset.
-                    </Typography>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <Typography>
-                      Evite optar por respostas que representariam como você
-                      gostaria de se comportar ou que você considera correto
-                      nestas situações.
-                    </Typography>
-                  </td>
-                </tr>
-              </table>
-            </LeftContainer>
-            <RightContainer>
-              <img
-                src={Map}
-                alt="logo"
-                width="470"
-                height="590"
-                style={{ marginBottom: 24 }}
-              />
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                <Button variant="solid" type="submit">
-                  <Typography variant="whiteRegular">Avançar </Typography>
-                </Button>
-              </div>
-            </RightContainer>
-          </Form>
-        </Formik>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            defaultValue={default_value}
+            control={control}
+            name="test"
+            render={({ field }) => (
+              <>
+                <table>
+                  <tr>
+                    <th>
+                      <QuestionContainer>
+                        <InputBox {...field} options={options} />
+                        <Typography variant="regular">
+                          Cada vez que faço algo, exijo de mim a maior perfeição
+                          ainda a que atividade demore mais.
+                        </Typography>
+                      </QuestionContainer>
+                    </th>
+                  </tr>
+                </table>
+                <ButtonsContainer>
+                  <Button variant="outline">
+                    <Typography variant="accentRegular">Voltar</Typography>
+                  </Button>
+                  <Button variant="solid" type="submit">
+                    <Typography variant="whiteRegular">Avançar</Typography>
+                  </Button>
+                </ButtonsContainer>
+              </>
+            )}
+          />
+          {/* <table>
+            <tr>
+              <th>
+                <QuestionContainer>
+                  <InputBox
+                    options={options}
+                    onChange={value => setThrusters1(value)}
+                    // value={setThrusters1 ? thrusters1 : 0}
+                    name="1"
+                  />
+                  <Typography variant="regular">
+                    Cada vez que faço algo, exijo de mim a maior perfeição ainda
+                    a que atividade demore mais.
+                  </Typography>
+                </QuestionContainer>
+              </th>
+            </tr>
+          </table>
+          <ButtonsContainer>
+            <Button variant="outline">
+              <Typography variant="accentRegular">Voltar</Typography>
+            </Button>
+            <Button variant="solid" type="submit">
+              <Typography variant="whiteRegular">Avançar</Typography>
+            </Button>
+          </ButtonsContainer> */}
+        </form>
       </div>
     </Container>
   );
