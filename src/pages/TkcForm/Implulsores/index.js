@@ -1,11 +1,7 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-
-// CUSTOM IMPORTS
-import { Container, QuestionContainer, ButtonsContainer } from './styles';
+import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { Typography, InputBox, Button } from '../../../components/atoms';
-
-const default_value = { id: 1, value: 0, label: '0' };
+import { QuestionContainer, ButtonsContainer } from './styles';
 
 const options = [
   { id: 1, value: 0, label: '0' },
@@ -14,88 +10,63 @@ const options = [
   { id: 4, value: 3, label: '3' },
 ];
 
-function Impulsores() {
-  // STATES
-  const { control, handleSubmit } = useForm();
+const questions = [
+  { id: 0, description: ' testando 123' },
+  { id: 1, description: ' testando 456' },
+];
 
-  const onSubmit = data => console.log(data);
+export default function Impulsores() {
+  const { register, control, handleSubmit } = useForm({
+    defaultValues: {
+      test: [{ id: 1, value: 0, label: '0' }],
+    },
+  });
+
+  const { fields, replace, append } = useFieldArray({
+    control,
+    name: 'test',
+  });
+
+  React.useEffect(() => {
+    questions.map(question => {
+      append(question);
+    });
+  }, [append, replace]);
+
+  const renderField = (item, index) => {
+    return (
+      <tr key={item.id}>
+        <th>
+          <QuestionContainer key={item.id}>
+            <InputBox {...register(`test.${index}`)} options={options} />
+            <Controller
+              render={({ field }) => <input {...field} />}
+              name={`test.${index}`}
+              control={control}
+            />
+            <Typography variant="regular">
+              Cada vez que faço algo, exijo de mim a maior perfeição ainda a que
+              atividade demore mais.
+            </Typography>
+          </QuestionContainer>
+        </th>
+      </tr>
+    );
+  };
+
+  const onSubmit = data => console.log('data', data);
 
   return (
-    <Container>
-      <div style={{ display: 'row' }}>
-        <Typography
-          variant="title"
-          style={{
-            textAlign: 'center',
-            textDecoration: 'underline',
-            fontWeight: 'bold',
-            marginBottom: '24px',
-          }}
-        >
-          Questionário Impulsores{' '}
-        </Typography>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            defaultValue={default_value}
-            control={control}
-            name="test"
-            render={({ field }) => (
-              <>
-                <table>
-                  <tr>
-                    <th>
-                      <QuestionContainer>
-                        <InputBox {...field} options={options} />
-                        <Typography variant="regular">
-                          Cada vez que faço algo, exijo de mim a maior perfeição
-                          ainda a que atividade demore mais.
-                        </Typography>
-                      </QuestionContainer>
-                    </th>
-                  </tr>
-                </table>
-                <ButtonsContainer>
-                  <Button variant="outline">
-                    <Typography variant="accentRegular">Voltar</Typography>
-                  </Button>
-                  <Button variant="solid" type="submit">
-                    <Typography variant="whiteRegular">Avançar</Typography>
-                  </Button>
-                </ButtonsContainer>
-              </>
-            )}
-          />
-          {/* <table>
-            <tr>
-              <th>
-                <QuestionContainer>
-                  <InputBox
-                    options={options}
-                    onChange={value => setThrusters1(value)}
-                    // value={setThrusters1 ? thrusters1 : 0}
-                    name="1"
-                  />
-                  <Typography variant="regular">
-                    Cada vez que faço algo, exijo de mim a maior perfeição ainda
-                    a que atividade demore mais.
-                  </Typography>
-                </QuestionContainer>
-              </th>
-            </tr>
-          </table>
-          <ButtonsContainer>
-            <Button variant="outline">
-              <Typography variant="accentRegular">Voltar</Typography>
-            </Button>
-            <Button variant="solid" type="submit">
-              <Typography variant="whiteRegular">Avançar</Typography>
-            </Button>
-          </ButtonsContainer> */}
-        </form>
-      </div>
-    </Container>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <table>{fields.map((item, index) => renderField(item, index))}</table>
+      <ButtonsContainer>
+        <Button variant="outline">
+          <Typography variant="accentRegular">Voltar</Typography>
+        </Button>
+        <Button variant="solid" type="submit">
+          <Typography variant="whiteRegular">Avançar</Typography>
+        </Button>
+      </ButtonsContainer>
+    </form>
   );
 }
-
-export default Impulsores;
