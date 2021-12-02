@@ -12,7 +12,6 @@ export const Container = styled.div`
   td,
   th {
     text-align: left;
-    padding: 8px;
   }
 
   tr:nth-child(even) {
@@ -22,12 +21,14 @@ export const Container = styled.div`
 
 export const QuestionContainer = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: center;
+  width: 900px;
+  justify-content: space;
   align-items: center;
+  padding: 8px;
 `;
 
 export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 24px;
 `;
