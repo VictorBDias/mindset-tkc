@@ -22,7 +22,7 @@ export const Container = styled.div`
 export const QuestionContainer = styled.div`
   display: flex;
   width: 900px;
-  justify-content: space;
+  justify-content: flex-start;
   align-items: center;
   padding: 8px;
 `;

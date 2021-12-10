@@ -146,7 +146,7 @@ export default function Impulsores() {
           <QuestionContainer key={item.id}>
             <Controller
               rules={{ required: true }}
-              render={({ field }) => <InputBox options={options} {...field} />}
+              render={({ field }) => <InputBox {...field} options={options} />}
               name={`impulsores.${index}`}
               control={control}
             />
@@ -157,7 +157,7 @@ export default function Impulsores() {
     );
   };
 
-  const onSubmit = data => console.log('data', data);
+  const onSubmit = data => console.log(data);
 
   return (
     <Container>

@@ -7,7 +7,7 @@ import { Container, SelectField } from './styles';
 const InputBox = ({ options, defaultValue, ...rest }) => {
   return (
     <Container style={{ width: 80, marginRight: 20 }}>
-      <SelectField options={options} defaultValue={defaultValue} {...rest} />
+      <SelectField {...rest} options={options} defaultValue={defaultValue} />
     </Container>
   );
 };

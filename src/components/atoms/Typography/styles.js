@@ -46,6 +46,14 @@ export const Paragraph = styled.p`
           color: #141414;
           font-weight: regular;
         `;
+
+      case 'accentRegular':
+        return css`
+          font-size: 16px;
+          color: #dd6b20;
+          font-weight: regular;
+        `;
+
       case 'whiteRegular':
         return css`
           font-size: 16px;
