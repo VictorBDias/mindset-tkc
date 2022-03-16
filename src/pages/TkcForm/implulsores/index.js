@@ -14,114 +14,128 @@ const options = [
 const questions = [
   {
     id: 1,
-    description:
+    value: 0,
+    label:
       'Cada vez que faço algo, exijo de mim a maior perfeição ainda a que atividade demore mais.',
   },
   {
     id: 2,
-    description:
-      'Custa-me muito fazer as coisas que a maioria das pessoas fazem.',
+    value: 0,
+    label: 'Custa-me muito fazer as coisas que a maioria das pessoas fazem.',
   },
   {
     id: 3,
-    description:
+    value: 0,
+    label:
       'Evito mostrar minhas emoções, principalmente chorar na frente dos outros.',
   },
-  { id: 4, description: 'Faço várias coisas ao mesmo tempo.' },
-  { id: 5, description: 'Custa-me dizer não se me pedem algo.' },
-  { id: 6, description: 'Valorizo usar bem as palavras.' },
+  { id: 4, value: 0, label: 'Faço várias coisas ao mesmo tempo.' },
+  { id: 5, value: 0, label: 'Custa-me dizer não se me pedem algo.' },
+  { id: 6, value: 0, label: 'Valorizo usar bem as palavras.' },
   {
     id: 7,
-    description:
+    value: 0,
+    label:
       'Percebo que a vida é uma luta continua e que tudo exige um grande esforço.',
   },
-  { id: 8, description: 'Necessito trabalhar rápido.' },
-  { id: 9, description: 'Aguento em silêncio, mesmo sofrendo..' },
+  { id: 8, value: 0, label: 'Necessito trabalhar rápido.' },
+  { id: 9, value: 0, label: 'Aguento em silêncio, mesmo sofrendo..' },
   {
     id: 10,
-    description:
-      'Desde criança os outros estão sempre em primeiro lugar para mim.',
+    value: 0,
+    label: 'Desde criança os outros estão sempre em primeiro lugar para mim.',
   },
   {
     id: 11,
-    description:
+    value: 0,
+    label:
       'Ainda que termine de fazer as coisas bem, penso que poderia ter sido feito melhor.',
   },
   {
     id: 12,
-    description: 'Faço muito rodeio, demoro para responder as coisas.',
+    value: 0,
+    label: 'Faço muito rodeio, demoro para responder as coisas.',
   },
-  { id: 13, description: 'As pessoas resistem em me acompanhar.' },
+  { id: 13, value: 0, label: 'As pessoas resistem em me acompanhar.' },
   {
     id: 14,
-    description:
-      'Responsabilizo-me sozinho pelo trabalho por mais duro que seja.',
+    value: 0,
+    label: 'Responsabilizo-me sozinho pelo trabalho por mais duro que seja.',
   },
-  { id: 15, description: 'Necessito estar bem com todas as pessoas.' },
+  { id: 15, value: 0, label: 'Necessito estar bem com todas as pessoas.' },
   {
     id: 16,
-    description:
-      'Se digo algo positivo, necessito completá-lo com algo negativo.',
+    value: 0,
+    label: 'Se digo algo positivo, necessito completá-lo com algo negativo.',
   },
   {
     id: 17,
-    description:
+    value: 0,
+    label:
       'É mais difícil para mim fazer as coisas de modo prático e simples. Complico a minha vida.',
   },
   {
     id: 18,
-    description:
-      'Faço as tarefas dos outros por não ter paciência de esperá-los.',
+    value: 0,
+    label: 'Faço as tarefas dos outros por não ter paciência de esperá-los.',
   },
   {
     id: 19,
-    description:
+    value: 0,
+    label:
       'Quando todos se sentem enfraquecidos, eu me mantenho e lhes dou apoio.',
   },
-  { id: 20, description: 'Gosto que me sirvam.' },
-  { id: 21, description: 'Detesto desordem.' },
+  { id: 20, value: 0, label: 'Gosto que me sirvam.' },
+  { id: 21, value: 0, label: 'Detesto desordem.' },
   {
     id: 22,
-    description: 'Esforço-me ao máximo se as coisas não saem como eu quero.',
+    value: 0,
+    label: 'Esforço-me ao máximo se as coisas não saem como eu quero.',
   },
   {
     id: 23,
-    description:
+    value: 0,
+    label:
       'Tendo a interromper as pessoas para poder terminar o que estava dizendo.',
   },
-  { id: 24, description: 'Detesto ser protegido.' },
+  { id: 24, value: 0, label: 'Detesto ser protegido.' },
   {
     id: 25,
-    description:
-      'Tento adivinhar o que os outros necessitam para logo agradá-los.',
+    value: 0,
+    label: 'Tento adivinhar o que os outros necessitam para logo agradá-los.',
   },
   {
     id: 26,
-    description:
-      'É insuportável os erros dos demais, é difícil ficar conformado.',
+    value: 0,
+    label: 'É insuportável os erros dos demais, é difícil ficar conformado.',
   },
-  { id: 27, description: 'Só dou valor ao que se obtém com grande esforço.' },
+  {
+    id: 27,
+    value: 0,
+    label: 'Só dou valor ao que se obtém com grande esforço.',
+  },
   {
     id: 28,
-    description: 'Quando quero ou pergunto algo, quero uma resposta imediata.',
+    value: 0,
+    label: 'Quando quero ou pergunto algo, quero uma resposta imediata.',
   },
-  { id: 29, description: 'Detesto que me neguem o que quero.' },
+  { id: 29, value: 0, label: 'Detesto que me neguem o que quero.' },
   {
     id: 30,
-    description:
-      'Exijo dos demais a máxima qualificação no estudo e no trabalho.',
+    value: 0,
+    label: 'Exijo dos demais a máxima qualificação no estudo e no trabalho.',
   },
   {
     id: 31,
-    description:
-      'Repito as perguntas que eu faço para facilitar que me compreendam.',
+    value: 0,
+    label: 'Repito as perguntas que eu faço para facilitar que me compreendam.',
   },
-  { id: 32, description: 'Irrito-me com pessoas lentas.' },
-  { id: 33, description: 'Primeiro o dever e a disciplina.' },
+  { id: 32, value: 0, label: 'Irrito-me com pessoas lentas.' },
+  { id: 33, value: 0, label: 'Primeiro o dever e a disciplina.' },
   {
     id: 34,
-    description:
-      'Sinto-me responsável em fazer as outras pessoas se sentirem bem.',
+    value: 0,
+    label: 'Sinto-me responsável em fazer as outras pessoas se sentirem bem.',
   },
 ];
 
@@ -146,11 +160,13 @@ export default function Impulsores() {
           <QuestionContainer key={item.id}>
             <Controller
               rules={{ required: true }}
-              render={({ field }) => <InputBox {...field} options={options} />}
+              render={({ field }) => (
+                <InputBox onChange={field.onChange} options={options} />
+              )}
               name={`impulsores.${index}`}
               control={control}
             />
-            <Typography variant="regular">{item.description}</Typography>
+            <Typography variant="regular">{item.label}</Typography>
           </QuestionContainer>
         </th>
       </tr>
