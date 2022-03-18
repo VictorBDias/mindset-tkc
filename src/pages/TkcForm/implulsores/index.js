@@ -177,7 +177,7 @@ export default function Impulsores() {
 
   return (
     <Container>
-      <div style={{ display: 'row' }}>
+      <div style={{ display: 'row', width: 900 }}>
         <Typography
           variant="title"
           style={{

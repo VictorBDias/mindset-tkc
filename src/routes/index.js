@@ -8,6 +8,8 @@ import Home from '../pages/Home';
 import Instructions from '../pages/TkcForm/instructions';
 import Impulsores from '../pages/TkcForm/implulsores';
 import Motivadores from '../pages/TkcForm/motivadores';
+import Assertividade from '~/pages/TkcForm/assertividade';
+import AnaliseGerencial from '~/pages/TkcForm/analiseGerencial';
 
 export default function Routes() {
   return (
@@ -19,6 +21,12 @@ export default function Routes() {
             <Route path="/instrucoes" exact component={Instructions} />
             <Route path="/impulsores" exact component={Impulsores} />
             <Route path="/motivadores" exact component={Motivadores} />
+            <Route path="/assertividade" exact component={Assertividade} />
+            <Route
+              path="/analiseGerencial"
+              exact
+              component={AnaliseGerencial}
+            />
           </GlobalProvider>
         </ChakraProvider>
         {/* <Route path="/" component={() => <h1>404! PAGE NOT FOUND</h1>} /> */}

@@ -14,28 +14,34 @@ const options = [
 const questions = [
   {
     id: 1,
-    question: 'O que mais incentiva e estimula o meu desempenho é:',
+    question:
+      'Suponha que você está numa roda de amigos e surge um desentendimento entre dois deles. A situação vai se complicando e você sente muito medo. O que faz?',
+
     option1: {
       id: 1,
       value: 0,
       label:
-        'Um salário compatível com as minhas necessidades básicas e as de minha família.',
+        'Afasta-se o mais rápido que puder, deixando que os dois resolvam.',
     },
     option2: {
       id: 2,
       value: 0,
-      label:
-        'A oportunidade de testar a minha própria capacidade de ter acesso aos meus resultados.',
+      label: 'Mostra-se tranquilo (embora não esteja) e se afasta com calma.',
+    },
+    option3: {
+      id: 3,
+      value: 0,
+      label: 'Revela a eles os seus temores e ajuda a resolver o problema.',
     },
   },
 ];
 
-export default function Motivadores() {
+export default function Assertividade() {
   const { control, handleSubmit } = useForm({});
 
   const { fields, replace, append } = useFieldArray({
     control,
-    name: 'motivadores',
+    name: 'assertividade',
   });
 
   React.useEffect(() => {
@@ -59,7 +65,7 @@ export default function Motivadores() {
                   render={({ field }) => (
                     <InputBox options={options} {...field} />
                   )}
-                  name={`motivadores.${index}.option1`}
+                  name={`assertividade.${index}.option1`}
                   control={control}
                 />
                 <Typography variant="regular">{item.option1.label}</Typography>
@@ -74,10 +80,25 @@ export default function Motivadores() {
                   render={({ field }) => (
                     <InputBox options={options} {...field} />
                   )}
-                  name={`motivadores.${index}.option2`}
+                  name={`assertividade.${index}.option2`}
                   control={control}
                 />
                 <Typography variant="regular">{item.option2.label}</Typography>
+              </QuestionContainer>
+            </th>
+          </tr>
+          <tr key={item.option3}>
+            <th>
+              <QuestionContainer key={item.option3.id}>
+                <Controller
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <InputBox options={options} {...field} />
+                  )}
+                  name={`assertividade.${index}.option3`}
+                  control={control}
+                />
+                <Typography variant="regular">{item.option3.label}</Typography>
               </QuestionContainer>
             </th>
           </tr>
@@ -101,7 +122,7 @@ export default function Motivadores() {
               marginBottom: '24px',
             }}
           >
-            Questionário Motivadores{' '}
+            Questionário Assertividade
           </Typography>
           <Typography
             variant="regular"
@@ -110,9 +131,9 @@ export default function Motivadores() {
               marginBottom: '16px',
             }}
           >
-            Você encontrará abaixo 30 proposições diferentes para ler e avaliar.
-            Cada uma delas apresenta duas alternativas possíveis. Ambas são
-            CORRETAS e VÁLIDAS.
+            As perguntas abaixo não tem por objetivo avaliar você. Servirão
+            apenas, para ajudá-lo(a) a compreender melhor alguns aspectos do seu
+            comportamento.
           </Typography>
           <Typography
             variant="regular"
@@ -121,9 +142,8 @@ export default function Motivadores() {
               marginBottom: '24px',
             }}
           >
-            Portanto, você deverá optar por aquela que melhor refletir a sua
-            realidade interna: aquela que mais parece com aquilo que você faz ou
-            costuma fazer ou acredita que faria naquelas circunstâncias.
+            Selecione a anternativa que escolher. Quanto mais sincero(a) e
+            honesto(a) for, melhor para você.
           </Typography>
 
           <Typography
@@ -132,36 +152,19 @@ export default function Motivadores() {
               marginBottom: '24px',
             }}
           >
-            1) Selecione 2 ou 3 pontos à alternativa que você escolher como a
-            mais significativa, dependendo do grau de sua importância comparada
-            com a alternativa menos cotada.
-          </Typography>
-
-          <Typography
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            2) Na outra alternativa, selecione 0 ou 1, dependendo dos pontos que
-            você atribuiu à primeira, já que a pontuação das duas deverá somar
-            sempre 3 pontos.
-          </Typography>
-
-          <Typography
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            Isto não é um teste de conhecimentos. Não há alternativas boas ou
-            más, corretas ou incorretas. Insira nos quadradinhos correspondentes
-            os pontos que você atribuir.
+            Procure colocar-se em cada situação abaixo e responda como se
+            comportaria realmente nelas. Declare o que você faz, habitualmente,
+            em situações idênticas e não o que gostaria de fazer. Se não houve
+            uma resposta que corresponda exatamente ao que faz, escolha a que
+            mais se aproxime do comportamento que teria naquela situação.
           </Typography>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <form className="motivadores-form" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="assertividade-form"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             {fields.map((item, index) => renderField(item, index))}
             <ButtonsContainer>
               <Button size="lg" variant="outline">
