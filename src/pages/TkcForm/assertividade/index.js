@@ -34,6 +34,26 @@ const questions = [
       label: 'Revela a eles os seus temores e ajuda a resolver o problema.',
     },
   },
+  {
+    id: 2,
+    question: 'Numa festa acontece algo muito engraçado. O que você faz?',
+
+    option1: {
+      id: 1,
+      value: 0,
+      label: 'Evita rir muito para não aparecer demais.',
+    },
+    option2: {
+      id: 2,
+      value: 0,
+      label: 'Ri muito na proporção em que a coisa é engraçada.',
+    },
+    option3: {
+      id: 3,
+      value: 0,
+      label: 'Dá grandes gargalhadas, não se importando com o ambiente.',
+    },
+  },
 ];
 
 export default function Assertividade() {
