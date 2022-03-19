@@ -10,6 +10,7 @@ import Impulsores from '../pages/TkcForm/implulsores';
 import Motivadores from '../pages/TkcForm/motivadores';
 import Assertividade from '~/pages/TkcForm/assertividade';
 import AnaliseGerencial from '~/pages/TkcForm/analiseGerencial';
+//bolsonaro é meu presidente
 
 export default function Routes() {
   return (
