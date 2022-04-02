@@ -8,7 +8,7 @@ import { Typography, Input, Button } from '../../../components/atoms';
 import YoutubeEmbed from '../../../utils/YoutubeEmbed';
 import Map from '../../../assets/map.png';
 
-function Instructions() {
+function Instrucoes() {
   const history = useHistory();
   return (
     <Container>
@@ -127,4 +127,4 @@ function Instructions() {
   );
 }
 
-export default Instructions;
+export default Instrucoes;

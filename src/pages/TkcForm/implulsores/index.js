@@ -211,6 +211,7 @@ export default function Impulsores() {
         </Typography>
         <form className="impulsores-form" onSubmit={handleSubmit(onSubmit)}>
           <table>{fields.map((item, index) => renderField(item, index))}</table>
+
           <ButtonsContainer>
             <Button size="lg" variant="outline">
               <Typography variant="accentRegular">Voltar</Typography>
