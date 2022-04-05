@@ -6,9 +6,15 @@ import { Formik, Form } from 'formik';
 import { Container } from './styles';
 import { Typography, Input, Button } from '../../components/atoms';
 import YoutubeEmbed from '../../utils/YoutubeEmbed';
+import { validateTokenAPI } from './apis';
 
 function Home() {
   const history = useHistory();
+
+  const handleSubmit = data => {
+    validateTokenAPI(data.token).then(response => console.log(response));
+    // history.push('/instrucoes')
+  };
 
   return (
     <Container>
@@ -29,10 +35,7 @@ function Home() {
           initialValues={{
             token: '',
           }}
-          onSubmit={() => {
-            history.push('/instrucoes');
-            // alert(JSON.stringify(values, null, 2));
-          }}
+          onSubmit={data => handleSubmit(data)}
         >
           <div
             style={{

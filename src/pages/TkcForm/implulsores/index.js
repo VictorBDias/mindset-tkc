@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { Typography, InputBox, Button } from '../../../components/atoms';
+import { showImpulsores } from './apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 const options = [
@@ -10,6 +11,14 @@ const options = [
   { id: 4, value: 3, label: '3' },
   { id: 5, value: 4, label: '4' },
 ];
+
+// "id": "3f48670c-c11f-4630-b35b-c4804db31f28",
+// "category_id": "49bb4258-cdce-448b-bcd0-101a67977e94",
+// "sentence": "Cada vez que faço algo, exijo de mim a maior perfeição ainda a que atividade demore mais.",
+// "type": "common",
+// "min_choice": null,
+// "max_choice": null,
+// "order": 1
 
 const questions = [
   {
@@ -140,7 +149,12 @@ const questions = [
 ];
 
 export default function Impulsores() {
+  const [questionsApi, setQuestionsApi] = React.useState([]);
   const { control, handleSubmit } = useForm({});
+
+  React.useEffect(() => {
+    showImpulsores().then(response => setQuestionsApi(response.data.questions));
+  }, []);
 
   const { fields, replace, append } = useFieldArray({
     control,
