@@ -5,11 +5,15 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GlobalProvider } from '~/hooks/globalProvider';
 import Home from '../pages/Home';
-import Instructions from '../pages/TkcForm/instructions';
+import Instructions from '../pages/TkcForm/Instrucoes';
 import Impulsores from '../pages/TkcForm/implulsores';
 import Motivadores from '../pages/TkcForm/motivadores';
 import Assertividade from '~/pages/TkcForm/assertividade';
-import AnaliseGerencial from '~/pages/TkcForm/analiseGerencial';
+import TomadaDecisao from '~/pages/TkcForm/analiseGerencial/pages/tomadaDecisao';
+import Programacao from '~/pages/TkcForm/analiseGerencial/pages/programacaoAtividades';
+import Execucao from '~/pages/TkcForm/analiseGerencial/pages/execucaoAtividades';
+import Controle from '~/pages/TkcForm/analiseGerencial/pages/controleAtividades';
+import Organizacionais from '~/pages/TkcForm/analiseGerencial/pages/mudancasOrganizacionais';
 
 export default function Routes() {
   return (
@@ -22,10 +26,14 @@ export default function Routes() {
             <Route path="/impulsores" exact component={Impulsores} />
             <Route path="/motivadores" exact component={Motivadores} />
             <Route path="/assertividade" exact component={Assertividade} />
+            <Route path="/analiseGerencial/1" exact component={TomadaDecisao} />
+            <Route path="/analiseGerencial/2" exact component={Programacao} />
+            <Route path="/analiseGerencial/3" exact component={Execucao} />
+            <Route path="/analiseGerencial/4" exact component={Controle} />
             <Route
-              path="/analiseGerencial"
+              path="/analiseGerencial/5"
               exact
-              component={AnaliseGerencial}
+              component={Organizacionais}
             />
           </GlobalProvider>
         </ChakraProvider>

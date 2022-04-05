@@ -71,62 +71,13 @@ export default function Assertividade() {
     });
   }, [append, replace]);
 
-  // const renderField = (item, index) => {
-  //   return (
-  //     <div style={{ marginTop: 32 }}>
-  //       <Typography variant="regular" style={{ marginBottom: 8 }}>
-  //         {item.question}
-  //       </Typography>
-  //       <table>
-  //         <tr key={item.option1.id}>
-  //           <th>
-  //             <QuestionContainer key={item.id}>
-  //               <Controller
-  //                 rules={{ required: true }}
-  //                 render={({ field }) => (
-  //                   <InputBox options={options} {...field} />
-  //                 )}
-  //                 name={`assertividade.${index}.option1`}
-  //                 control={control}
-  //               />
-  //               <Typography variant="regular">{item.option1.label}</Typography>
-  //             </QuestionContainer>
-  //           </th>
-  //         </tr>
-  //         <tr key={item.id}>
-  //           <th>
-  //             <QuestionContainer key={item.option2.id}>
-  //               <Controller
-  //                 rules={{ required: true }}
-  //                 render={({ field }) => (
-  //                   <InputBox options={options} {...field} />
-  //                 )}
-  //                 name={`assertividade.${index}.option2`}
-  //                 control={control}
-  //               />
-  //               <Typography variant="regular">{item.option2.label}</Typography>
-  //             </QuestionContainer>
-  //           </th>
-  //         </tr>
-  //         <tr key={item.option3}>
-  //           <th>
-  //             <QuestionContainer key={item.option3.id}>
-  //               <Controller
-  //                 rules={{ required: true }}
-  //                 render={({ field }) => (
-  //                   <InputBox options={options} {...field} />
-  //                 )}
-  //                 name={`assertividade.${index}.option3`}
-  //                 control={control}
-  //               />
-  //               <Typography variant="regular">{item.option3.label}</Typography>
-  //             </QuestionContainer>
-  //           </th>
-  //         </tr>
-  //       </table>
-  //     </div>
-  //   );
-  // };
+  // CHECKBOX NATIVA DO HOOKFORM, REGISTER VEM DO USEFORM
+  //   <input
+  //   name="acceptTerms"
+  //   type="checkbox"
+  //   {...register('acceptTerms')}
+  //   id="acceptTerms"
+  // />
 
   const renderField = (item, index) => {
     return (
