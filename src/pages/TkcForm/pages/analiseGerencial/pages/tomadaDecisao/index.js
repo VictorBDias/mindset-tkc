@@ -1,27 +1,41 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { Typography, InputBox, Button } from '../../../components/atoms';
-import { answerQuestions, showImpulsores } from './apis';
+import {
+  Typography,
+  InputBox,
+  Button,
+} from '../../../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
-export default function Impulsores() {
-  const [questionsApi, setQuestionsApi] = React.useState([]);
-  const { control, handleSubmit } = useForm({});
+const options = [
+  { id: 1, value: 0, label: '0' },
+  { id: 2, value: 1, label: '1' },
+  { id: 3, value: 2, label: '2' },
+  { id: 4, value: 3, label: '3' },
+];
 
-  React.useEffect(() => {
-    showImpulsores().then(response => setQuestionsApi(response.data.questions));
-  }, []);
+const questions = [
+  {
+    id: 1,
+    value: 0,
+    label:
+      'Recuso-me aceitar a interferência de subordinados na programação do trabalho.',
+  },
+];
+
+export default function AnaliseGerencial() {
+  const { control, handleSubmit } = useForm({});
 
   const { fields, replace, append } = useFieldArray({
     control,
-    name: 'impulsores',
+    name: 'analiseGerencial',
   });
 
   React.useEffect(() => {
-    questionsApi.map(question => {
+    questions.map(question => {
       append(question);
     });
-  }, [append, replace, questionsApi]);
+  }, [append, replace]);
 
   const renderField = (item, index) => {
     return (
@@ -31,35 +45,19 @@ export default function Impulsores() {
             <Controller
               rules={{ required: true }}
               render={({ field }) => (
-                <InputBox onChange={field.onChange} options={item.choices} />
+                <InputBox onChange={field.onChange} options={options} />
               )}
-              name={`impulsores.${index}`}
+              name={`analiseGerencial.${index}`}
               control={control}
             />
-            <Typography variant="regular">{item.sentence}</Typography>
+            <Typography variant="regular">{item.label}</Typography>
           </QuestionContainer>
         </th>
       </tr>
     );
   };
 
-  const handleFormatAnswerData = data => {
-    const choicesArray = [];
-
-    data.impulsores.map(value =>
-      choicesArray.push({
-        question_id: value.question_id,
-        choice_id: value.id,
-      })
-    );
-
-    answerQuestions({
-      userId: '9a2d7e1a-a702-4f89-93fa-8872c17cd143',
-      choices: choicesArray,
-    });
-  };
-
-  const onSubmit = data => console.log(data.impulsores);
+  const onSubmit = data => console.log(data);
 
   return (
     <Container>
@@ -73,7 +71,7 @@ export default function Impulsores() {
             marginBottom: '24px',
           }}
         >
-          Questionário Impulsores
+          Questionário Análise Gerencial
         </Typography>
         <Typography
           variant="regular"
@@ -82,8 +80,8 @@ export default function Impulsores() {
             marginBottom: '16px',
           }}
         >
-          Leia atentamente as questões e selecione as opções conforme critério
-          abaixo:{' '}
+          Selecione um número de 0 a 3 nas células em branco, de acordo com a
+          frequência que você age dentro do que é expresso, como se segue:
         </Typography>
         <Typography
           variant="subTitle"
@@ -92,12 +90,14 @@ export default function Impulsores() {
             marginBottom: '24px',
           }}
         >
-          0 - NUNCA 1 - QUASE NUNCA 2 - ALGUMAS VEZES 3 - QUASE SEMPRE 4 -
-          SEMPRE
+          0 - NUNCA 1 - ÀS VEZES 2 - MUITAS VEZES 3 - SEMPRE
         </Typography>
-        <form className="impulsores-form" onSubmit={handleSubmit(onSubmit)}>
+        <Typography>Programação de atividades</Typography>
+        <form
+          className="analiseGerencial-form"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <table>{fields.map((item, index) => renderField(item, index))}</table>
-
           <ButtonsContainer>
             <Button size="lg" variant="outline">
               <Typography variant="accentRegular">Voltar</Typography>

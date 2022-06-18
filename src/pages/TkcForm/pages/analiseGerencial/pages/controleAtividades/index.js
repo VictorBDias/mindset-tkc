@@ -1,6 +1,10 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { Typography, InputBox, Button } from '../../../../../components/atoms';
+import {
+  Typography,
+  InputBox,
+  Button,
+} from '../../../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 const options = [

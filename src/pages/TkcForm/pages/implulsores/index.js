@@ -1,36 +1,30 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { Typography, InputBox, Button } from '../../../../../components/atoms';
+import { Typography, InputBox, Button } from '~/components/atoms';
+import history from '~/services/history';
+import { answerQuestionsAPI, showCategoryAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
-const options = [
-  { id: 1, value: 0, label: '0' },
-  { id: 2, value: 1, label: '1' },
-  { id: 3, value: 2, label: '2' },
-  { id: 4, value: 3, label: '3' },
-];
-
-const questions = [
-  {
-    id: 1,
-    value: 0,
-    label: 'Só ouso sugerir modificações quando me solicitam.',
-  },
-];
-
-export default function AnaliseGerencial() {
+export default function Impulsores() {
   const { control, handleSubmit } = useForm({});
+  const [questions, setQuestions] = React.useState([]);
+
+  React.useEffect(() => {
+    showCategoryAPI('63341458-e6ac-4552-83e1-aa9c027e4afc').then(response =>
+      setQuestions(response.data.questions)
+    );
+  }, []);
 
   const { fields, replace, append } = useFieldArray({
     control,
-    name: 'analiseGerencial',
+    name: 'impulsores',
   });
 
   React.useEffect(() => {
     questions.map(question => {
       append(question);
     });
-  }, [append, replace]);
+  }, [append, replace, questions]);
 
   const renderField = (item, index) => {
     return (
@@ -40,19 +34,42 @@ export default function AnaliseGerencial() {
             <Controller
               rules={{ required: true }}
               render={({ field }) => (
-                <InputBox onChange={field.onChange} options={options} />
+                <InputBox onChange={field.onChange} options={item.choices} />
               )}
-              name={`analiseGerencial.${index}`}
+              name={`impulsores.${index}`}
               control={control}
             />
-            <Typography variant="regular">{item.label}</Typography>
+            <Typography variant="regular">{item.sentence}</Typography>
           </QuestionContainer>
         </th>
       </tr>
     );
   };
 
-  const onSubmit = data => console.log(data);
+  const handleFormatAnswerData = data => {
+    const choicesArray = [];
+
+    data.impulsores.map(value => {
+      if (value.choices) {
+        choicesArray.push({
+          question_id: value.choices[0].question_id,
+          choice_id: value.choices[0].id,
+        });
+      } else {
+        choicesArray.push({
+          question_id: value.question_id,
+          choice_id: value.id,
+        });
+      }
+    });
+
+    answerQuestionsAPI({
+      userId: '0d7d26f1-911f-4f1a-8c02-bba9e7b79900',
+      choices: choicesArray,
+    }).then(() => history.push('/motivadores'));
+  };
+
+  const onSubmit = data => handleFormatAnswerData(data);
 
   return (
     <Container>
@@ -66,7 +83,7 @@ export default function AnaliseGerencial() {
             marginBottom: '24px',
           }}
         >
-          Questionário Análise Gerencial
+          Questionário Impulsores
         </Typography>
         <Typography
           variant="regular"
@@ -75,8 +92,8 @@ export default function AnaliseGerencial() {
             marginBottom: '16px',
           }}
         >
-          Selecione um número de 0 a 3 nas células em branco, de acordo com a
-          frequência que você age dentro do que é expresso, como se segue:
+          Leia atentamente as questões e selecione as opções conforme critério
+          abaixo:{' '}
         </Typography>
         <Typography
           variant="subTitle"
@@ -85,14 +102,12 @@ export default function AnaliseGerencial() {
             marginBottom: '24px',
           }}
         >
-          0 - NUNCA 1 - ÀS VEZES 2 - MUITAS VEZES 3 - SEMPRE
+          0 - NUNCA 1 - QUASE NUNCA 2 - ALGUMAS VEZES 3 - QUASE SEMPRE 4 -
+          SEMPRE
         </Typography>
-        <Typography>Mudanças organizacionais</Typography>
-        <form
-          className="analiseGerencial-form"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="impulsores-form" onSubmit={handleSubmit(onSubmit)}>
           <table>{fields.map((item, index) => renderField(item, index))}</table>
+
           <ButtonsContainer>
             <Button size="lg" variant="outline">
               <Typography variant="accentRegular">Voltar</Typography>

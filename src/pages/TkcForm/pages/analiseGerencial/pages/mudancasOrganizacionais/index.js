@@ -1,6 +1,10 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { Typography, InputBox, Button } from '../../../../../components/atoms';
+import {
+  Typography,
+  InputBox,
+  Button,
+} from '../../../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 const options = [
@@ -14,7 +18,7 @@ const questions = [
   {
     id: 1,
     value: 0,
-    label: 'Fico revoltado por ter que cumprir horários.',
+    label: 'Só ouso sugerir modificações quando me solicitam.',
   },
 ];
 
@@ -87,7 +91,7 @@ export default function AnaliseGerencial() {
         >
           0 - NUNCA 1 - ÀS VEZES 2 - MUITAS VEZES 3 - SEMPRE
         </Typography>
-        <Typography>Execução de atividades</Typography>
+        <Typography>Mudanças organizacionais</Typography>
         <form
           className="analiseGerencial-form"
           onSubmit={handleSubmit(onSubmit)}

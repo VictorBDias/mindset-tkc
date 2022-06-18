@@ -1,37 +1,18 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { Typography, InputBox, Button } from '../../../components/atoms';
+import { showCategoryAPI } from '../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
-
-const options = [
-  { id: 1, value: 0, label: '0' },
-  { id: 2, value: 1, label: '1' },
-  { id: 3, value: 2, label: '2' },
-  { id: 4, value: 3, label: '3' },
-  { id: 5, value: 4, label: '4' },
-];
-
-const questions = [
-  {
-    id: 1,
-    question: 'O que mais incentiva e estimula o meu desempenho é:',
-    option1: {
-      id: 1,
-      value: 0,
-      label:
-        'Um salário compatível com as minhas necessidades básicas e as de minha família.',
-    },
-    option2: {
-      id: 2,
-      value: 0,
-      label:
-        'A oportunidade de testar a minha própria capacidade de ter acesso aos meus resultados.',
-    },
-  },
-];
 
 export default function Motivadores() {
   const { control, handleSubmit } = useForm({});
+  const [questions, setQuestions] = React.useState([]);
+
+  React.useEffect(() => {
+    showCategoryAPI('1cd52d8c-04bb-439e-9f20-f30e8f7c0542').then(response =>
+      setQuestions(response.data.questions)
+    );
+  }, []);
 
   const { fields, replace, append } = useFieldArray({
     control,
@@ -42,42 +23,43 @@ export default function Motivadores() {
     questions.map(question => {
       append(question);
     });
-  }, [append, replace]);
+  }, [append, replace, questions]);
 
   const renderField = (item, index) => {
+    const { choices } = item;
     return (
       <div style={{ marginTop: 32 }}>
         <Typography variant="regular" style={{ marginBottom: 8 }}>
-          {item.question}
+          {item.sentence}
         </Typography>
         <table>
-          <tr key={item.option1.id}>
+          <tr key={choices[0].id}>
             <th>
-              <QuestionContainer key={item.id}>
+              <QuestionContainer key={choices[0].id}>
                 <Controller
                   rules={{ required: true }}
                   render={({ field }) => (
-                    <InputBox options={options} {...field} />
+                    <InputBox options={choices} {...field} />
                   )}
                   name={`motivadores.${index}.option1`}
                   control={control}
                 />
-                <Typography variant="regular">{item.option1.label}</Typography>
+                <Typography variant="regular">{choices[0].sentence}</Typography>
               </QuestionContainer>
             </th>
           </tr>
-          <tr key={item.id}>
+          <tr key={choices[1].id}>
             <th>
-              <QuestionContainer key={item.option2.id}>
+              <QuestionContainer key={choices[1].id}>
                 <Controller
                   rules={{ required: true }}
                   render={({ field }) => (
-                    <InputBox options={options} {...field} />
+                    <InputBox options={choices} {...field} />
                   )}
-                  name={`motivadores.${index}.option2`}
+                  name={`motivadores.${index}.option1`}
                   control={control}
                 />
-                <Typography variant="regular">{item.option2.label}</Typography>
+                <Typography variant="regular">{choices[1].sentence}</Typography>
               </QuestionContainer>
             </th>
           </tr>

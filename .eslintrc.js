@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   rules: {
+    "array-callback-return": "off",
     "prettier/prettier": "error",
     "no-console": "off",
     "react/jsx-props-no-spreading": "off",

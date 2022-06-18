@@ -8,12 +8,12 @@ import Home from '../pages/Home';
 import Instructions from '../pages/TkcForm/Instrucoes';
 import Impulsores from '../pages/TkcForm/implulsores';
 import Motivadores from '../pages/TkcForm/motivadores';
-import Assertividade from '~/pages/TkcForm/assertividade';
-import TomadaDecisao from '~/pages/TkcForm/analiseGerencial/pages/tomadaDecisao';
-import Programacao from '~/pages/TkcForm/analiseGerencial/pages/programacaoAtividades';
-import Execucao from '~/pages/TkcForm/analiseGerencial/pages/execucaoAtividades';
-import Controle from '~/pages/TkcForm/analiseGerencial/pages/controleAtividades';
-import Organizacionais from '~/pages/TkcForm/analiseGerencial/pages/mudancasOrganizacionais';
+import Assertividade from '~/pages/TkcForm/pages/assertividade';
+import TomadaDecisao from '~/pages/TkcForm/pages/analiseGerencial/pages/tomadaDecisao';
+import Programacao from '~/pages/TkcForm/pages/analiseGerencial/pages/programacaoAtividades';
+import Execucao from '~/pages/TkcForm/pages/analiseGerencial/pages/execucaoAtividades';
+import Controle from '~/pages/TkcForm/pages/analiseGerencial/pages/controleAtividades';
+import Organizacionais from '~/pages/TkcForm/pages/analiseGerencial/pages/mudancasOrganizacionais';
 
 export default function Routes() {
   return (

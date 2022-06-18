@@ -1,64 +1,21 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { Checkbox } from '@chakra-ui/react';
-import { Typography, InputBox, Button } from '../../../components/atoms';
+import { Typography, InputBox, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
-
-const options = [
-  { id: 1, value: 0, label: '0' },
-  { id: 2, value: 1, label: '1' },
-  { id: 3, value: 2, label: '2' },
-  { id: 4, value: 3, label: '3' },
-  { id: 5, value: 4, label: '4' },
-];
-
-const questions = [
-  {
-    id: 1,
-    question:
-      'Suponha que você está numa roda de amigos e surge um desentendimento entre dois deles. A situação vai se complicando e você sente muito medo. O que faz?',
-
-    option1: {
-      id: 1,
-      value: 0,
-      label:
-        'Afasta-se o mais rápido que puder, deixando que os dois resolvam.',
-    },
-    option2: {
-      id: 2,
-      value: 0,
-      label: 'Mostra-se tranquilo (embora não esteja) e se afasta com calma.',
-    },
-    option3: {
-      id: 3,
-      value: 0,
-      label: 'Revela a eles os seus temores e ajuda a resolver o problema.',
-    },
-  },
-  {
-    id: 2,
-    question: 'Numa festa acontece algo muito engraçado. O que você faz?',
-
-    option1: {
-      id: 1,
-      value: 0,
-      label: 'Evita rir muito para não aparecer demais.',
-    },
-    option2: {
-      id: 2,
-      value: 0,
-      label: 'Ri muito na proporção em que a coisa é engraçada.',
-    },
-    option3: {
-      id: 3,
-      value: 0,
-      label: 'Dá grandes gargalhadas, não se importando com o ambiente.',
-    },
-  },
-];
+import { answerQuestionsAPI, showCategoryAPI } from '../../apis';
+import history from '~/services/history';
 
 export default function Assertividade() {
-  const { control, handleSubmit } = useForm({});
+  const [choicesArray, setChoicesArray] = React.useState([]);
+  const { control, handleSubmit, register } = useForm({});
+  const [questions, setQuestions] = React.useState([]);
+
+  React.useEffect(() => {
+    showCategoryAPI('6fc59dab-b69c-4d4b-a1f5-138809580612').then(response =>
+      setQuestions(response.data.questions)
+    );
+  }, []);
 
   const { fields, replace, append } = useFieldArray({
     control,
@@ -69,51 +26,95 @@ export default function Assertividade() {
     questions.map(question => {
       append(question);
     });
-  }, [append, replace]);
+  }, [append, replace, questions]);
+
+  function handleAnswer(question, choiceId) {
+    const alreadySelected = choicesArray.findIndex(
+      item => item.choice_id === choiceId
+    );
+    if (alreadySelected >= 0) {
+      const filteredAnswers = choicesArray.filter(
+        item => item.choice_id !== choiceId
+      );
+
+      setChoicesArray(filteredAnswers);
+    } else {
+      setChoicesArray([
+        ...choicesArray,
+        {
+          question_id: question.id,
+          choice_id: choiceId,
+        },
+      ]);
+    }
+  }
+
+  const handleFormatAnswerData = () => {
+    answerQuestionsAPI({
+      userId: '0d7d26f1-911f-4f1a-8c02-bba9e7b79900',
+      choices: choicesArray,
+    }).then(() => history.push('/analiseGerencial/1'));
+  };
 
   // CHECKBOX NATIVA DO HOOKFORM, REGISTER VEM DO USEFORM
   //   <input
   //   name="acceptTerms"
   //   type="checkbox"
   //   {...register('acceptTerms')}
-  //   id="acceptTerms"
+  //   id={choices[0].id}
   // />
+  // <Typography style={{ marginLeft: 8 }} variant="regular">
+  //   {choices[0].sentence}
+  // </Typography>
 
-  const renderField = (item, index) => {
+  const renderField = item => {
+    const { choices } = item;
     return (
       <div style={{ marginTop: 32 }}>
         <Typography variant="regular" style={{ marginBottom: 8 }}>
-          {item.question}
+          {item.sentence}
         </Typography>
         <table>
-          <tr key={item.option1.id}>
+          <tr key={choices[0].id}>
             <th>
-              <QuestionContainer key={item.id}>
-                <Checkbox size="lg" colorScheme="orange">
+              <QuestionContainer key={choices[0].id}>
+                <Checkbox
+                  size="lg"
+                  colorScheme="orange"
+                  onChange={() => handleAnswer(item, choices[0].id)}
+                >
                   <Typography variant="regular">
-                    {item.option1.label}
+                    {choices[0].sentence}
                   </Typography>
                 </Checkbox>
               </QuestionContainer>
             </th>
           </tr>
-          <tr key={item.id}>
+          <tr key={choices[1].id}>
             <th>
-              <QuestionContainer key={item.option2.id}>
-                <Checkbox size="lg" colorScheme="orange">
+              <QuestionContainer key={choices[1].id}>
+                <Checkbox
+                  size="lg"
+                  colorScheme="orange"
+                  onChange={() => handleAnswer(item, choices[1].id)}
+                >
                   <Typography variant="regular">
-                    {item.option2.label}
+                    {choices[1].sentence}
                   </Typography>
                 </Checkbox>
               </QuestionContainer>
             </th>
           </tr>
-          <tr key={item.option3}>
+          <tr key={choices[2].id}>
             <th>
-              <QuestionContainer key={item.option3.id}>
-                <Checkbox size="lg" colorScheme="orange">
+              <QuestionContainer key={choices[2].id}>
+                <Checkbox
+                  size="lg"
+                  colorScheme="orange"
+                  onChange={() => handleAnswer(item, choices[2].id)}
+                >
                   <Typography variant="regular">
-                    {item.option3.label}
+                    {choices[2].sentence}
                   </Typography>
                 </Checkbox>
               </QuestionContainer>
@@ -124,7 +125,7 @@ export default function Assertividade() {
     );
   };
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => handleFormatAnswerData(data);
 
   return (
     <Container>
@@ -182,7 +183,7 @@ export default function Assertividade() {
             className="assertividade-form"
             onSubmit={handleSubmit(onSubmit)}
           >
-            {fields.map((item, index) => renderField(item, index))}
+            {questions.map(item => renderField(item))}
             <ButtonsContainer>
               <Button size="lg" variant="outline">
                 <Typography variant="accentRegular">Voltar</Typography>
