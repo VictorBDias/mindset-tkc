@@ -6,20 +6,20 @@ import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import history from '~/services/history';
 
-export default function Assertividade() {
+export default function Autoresponsabilidade() {
   const [choicesArray, setChoicesArray] = React.useState([]);
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
   React.useEffect(() => {
-    listQuestionsAPI('assertividade').then(response =>
+    listQuestionsAPI('Autorresponsabilidade').then(response =>
       setQuestions(response.data.questions)
     );
   }, []);
 
   const { replace, append } = useFieldArray({
     control,
-    name: 'assertividade',
+    name: 'autoresponsabilidade',
   });
 
   React.useEffect(() => {
@@ -64,9 +64,9 @@ export default function Assertividade() {
           {item.sentence}
         </Typography>
         <table>
-          <tr key={choices[0].id}>
+          <tr key={item.id}>
             <th>
-              <QuestionContainer key={choices[0].id}>
+              <QuestionContainer key={item.id}>
                 <Checkbox
                   size="lg"
                   colorScheme="orange"
@@ -74,36 +74,6 @@ export default function Assertividade() {
                 >
                   <Typography variant="regular">
                     {choices[0].sentence}
-                  </Typography>
-                </Checkbox>
-              </QuestionContainer>
-            </th>
-          </tr>
-          <tr key={choices[1].id}>
-            <th>
-              <QuestionContainer key={choices[1].id}>
-                <Checkbox
-                  size="lg"
-                  colorScheme="orange"
-                  onChange={() => handleAnswer(item, choices[1].id)}
-                >
-                  <Typography variant="regular">
-                    {choices[1].sentence}
-                  </Typography>
-                </Checkbox>
-              </QuestionContainer>
-            </th>
-          </tr>
-          <tr key={choices[2].id}>
-            <th>
-              <QuestionContainer key={choices[2].id}>
-                <Checkbox
-                  size="lg"
-                  colorScheme="orange"
-                  onChange={() => handleAnswer(item, choices[2].id)}
-                >
-                  <Typography variant="regular">
-                    {choices[2].sentence}
                   </Typography>
                 </Checkbox>
               </QuestionContainer>
@@ -129,7 +99,7 @@ export default function Assertividade() {
               marginBottom: '24px',
             }}
           >
-            Questionário Assertividade
+            Questionário de Autoresponsabilidade
           </Typography>
           <Typography
             variant="regular"
@@ -138,38 +108,14 @@ export default function Assertividade() {
               marginBottom: '16px',
             }}
           >
-            As perguntas abaixo não tem por objetivo avaliar você. Servirão
-            apenas, para ajudá-lo(a) a compreender melhor alguns aspectos do seu
-            comportamento.
-          </Typography>
-          <Typography
-            variant="regular"
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            Selecione a anternativa que escolher. Quanto mais sincero(a) e
-            honesto(a) for, melhor para você.
-          </Typography>
-
-          <Typography
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            Procure colocar-se em cada situação abaixo e responda como se
-            comportaria realmente nelas. Declare o que você faz, habitualmente,
-            em situações idênticas e não o que gostaria de fazer. Se não houve
-            uma resposta que corresponda exatamente ao que faz, escolha a que
-            mais se aproxime do comportamento que teria naquela situação.
+            Não há respostas certas ou erradas. Selecione as opções que você
+            costuma repetir com frequência diária, semanal ou quinzenal.
           </Typography>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <form
-            className="assertividade-form"
+            className="autoresponsabilidade-form"
             onSubmit={handleSubmit(onSubmit)}
           >
             {questions.map(item => renderField(item))}

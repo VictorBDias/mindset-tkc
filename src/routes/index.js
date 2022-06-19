@@ -11,6 +11,10 @@ import Motivadores from '../pages/TkcForm/pages/motivadores';
 import Assertividade from '~/pages/TkcForm/pages/assertividade';
 import AnaliseGerencial from '~/pages/TkcForm/pages/analiseGerencial';
 import PredominanciaCerebral from '~/pages/TkcForm/pages/predominanciaCerebral';
+import GestaoTempo from '~/pages/TkcForm/pages/gestaoTempo';
+import Intensidade from '~/pages/TkcForm/pages/intensidade';
+import Conexao from '~/pages/TkcForm/pages/conexao';
+import Autoresponsabilidade from '~/pages/TkcForm/pages/autoresponsabilidade';
 
 export default function Routes() {
   return (
@@ -32,6 +36,14 @@ export default function Routes() {
               path="/predominanciaCerebral"
               exact
               component={PredominanciaCerebral}
+            />
+            <Route path="/gestaoTempo" exact component={GestaoTempo} />
+            <Route path="/intensidade" exact component={Intensidade} />
+            <Route path="/conexao" exact component={Conexao} />
+            <Route
+              path="/autoresponsabilidade"
+              exact
+              component={Autoresponsabilidade}
             />
           </GlobalProvider>
         </ChakraProvider>

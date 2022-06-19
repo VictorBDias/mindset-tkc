@@ -2,7 +2,7 @@ import api from '../../../services/api';
 
 export const answerQuestionsAPI = ({ userId, choices }) =>
   api.post(`/answers`, {
-    user_id: '6d3c72f9-bb17-4eb0-af48-289b0acfb48a',
+    user_id: 'dfd1fb74-3e4a-4b9c-87d8-d39235d5fe80',
     choices,
   });
 

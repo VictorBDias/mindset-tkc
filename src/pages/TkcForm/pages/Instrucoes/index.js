@@ -32,7 +32,7 @@ function Instrucoes() {
           }}
           onSubmit={values => {
             console.log(values);
-            // history.push('/impulsores');
+            history.push('/impulsores');
           }}
         >
           <Form>
