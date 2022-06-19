@@ -4,19 +4,19 @@ import { Button, InputBox, Typography } from '~/components/atoms';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
-export default function Motivadores() {
+export default function AnaliseGerencial() {
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
   React.useEffect(() => {
-    listQuestionsAPI('motivadores').then(response =>
+    listQuestionsAPI('gerencial').then(response =>
       setQuestions(response.data.questions)
     );
   }, []);
 
   const { fields, replace, append } = useFieldArray({
     control,
-    name: 'motivadores',
+    name: 'analiseGerencial',
   });
 
   React.useEffect(() => {
@@ -28,7 +28,7 @@ export default function Motivadores() {
   const handleFormatAnswerData = data => {
     const choicesArray = [];
 
-    data.motivadores.map(value => {
+    data.analiseGerencial.map(value => {
       if (value.dependencies[0]) {
         value.dependencies.map(dependency => {
           if (dependency) {
@@ -57,6 +57,23 @@ export default function Motivadores() {
     });
   };
 
+  const renderChoice = (choice, choiceIndex, index) => (
+    <tr key={choice.id}>
+      <th>
+        <QuestionContainer key={choice.id}>
+          <Controller
+            render={({ field }) => (
+              <InputBox options={choice.dependencies} {...field} />
+            )}
+            name={`analiseGerencial.${index}.dependencies.${choiceIndex}`}
+            control={control}
+          />
+          <Typography variant="regular">{choice.sentence}</Typography>
+        </QuestionContainer>
+      </th>
+    </tr>
+  );
+
   const renderField = (item, index) => {
     const { choices } = item;
     return (
@@ -65,34 +82,9 @@ export default function Motivadores() {
           {item.sentence}
         </Typography>
         <table>
-          <tr key={choices[0].id}>
-            <th>
-              <QuestionContainer key={choices[0].id}>
-                <Controller
-                  render={({ field }) => (
-                    <InputBox options={choices[0].dependencies} {...field} />
-                  )}
-                  name={`motivadores.${index}.dependencies.0`}
-                  control={control}
-                />
-                <Typography variant="regular">{choices[0].sentence}</Typography>
-              </QuestionContainer>
-            </th>
-          </tr>
-          <tr key={choices[1].id}>
-            <th>
-              <QuestionContainer key={choices[1].id}>
-                <Controller
-                  render={({ field }) => (
-                    <InputBox options={choices[1].dependencies} {...field} />
-                  )}
-                  name={`motivadores.${index}.dependencies.1`}
-                  control={control}
-                />
-                <Typography variant="regular">{choices[1].sentence}</Typography>
-              </QuestionContainer>
-            </th>
-          </tr>
+          {choices.map((choice, choiceIndex) =>
+            renderChoice(choice, choiceIndex, index)
+          )}
         </table>
       </div>
     );
@@ -113,7 +105,7 @@ export default function Motivadores() {
               marginBottom: '24px',
             }}
           >
-            Questionário Motivadores{' '}
+            Questionário Análise Gerencial
           </Typography>
           <Typography
             variant="regular"
@@ -122,58 +114,25 @@ export default function Motivadores() {
               marginBottom: '16px',
             }}
           >
-            Você encontrará abaixo 30 proposições diferentes para ler e avaliar.
-            Cada uma delas apresenta duas alternativas possíveis. Ambas são
-            CORRETAS e VÁLIDAS.
+            Selecione um número de 0 a 3 nas células em branco, de acordo com a
+            frequência que você age dentro do que é expresso, como se segue:
           </Typography>
           <Typography
-            variant="regular"
+            variant="subTitle"
             style={{
               textAlign: 'center',
               marginBottom: '24px',
             }}
           >
-            Portanto, você deverá optar por aquela que melhor refletir a sua
-            realidade interna: aquela que mais parece com aquilo que você faz ou
-            costuma fazer ou acredita que faria naquelas circunstâncias.
-          </Typography>
-
-          <Typography
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            1) Selecione 2 ou 3 pontos à alternativa que você escolher como a
-            mais significativa, dependendo do grau de sua importância comparada
-            com a alternativa menos cotada.
-          </Typography>
-
-          <Typography
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            2) Na outra alternativa, selecione 0 ou 1, dependendo dos pontos que
-            você atribuiu à primeira, já que a pontuação das duas deverá somar
-            sempre 3 pontos.
-          </Typography>
-
-          <Typography
-            style={{
-              textAlign: 'center',
-              marginBottom: '24px',
-            }}
-          >
-            Isto não é um teste de conhecimentos. Não há alternativas boas ou
-            más, corretas ou incorretas. Insira nos quadradinhos correspondentes
-            os pontos que você atribuir.
+            0 - NUNCA 1 - ÀS VEZES 2 - MUITAS VEZES 3 - SEMPRE
           </Typography>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <form className="motivadores-form" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="analiseGerencial-form"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             {fields.map((item, index) => renderField(item, index))}
             <ButtonsContainer>
               <Button size="lg" variant="outline">

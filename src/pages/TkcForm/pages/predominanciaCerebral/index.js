@@ -1,25 +1,25 @@
 import React from 'react';
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { Checkbox } from '@chakra-ui/react';
-import { Typography, InputBox, Button } from '../../../../components/atoms';
+import { Typography, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import history from '~/services/history';
 
-export default function Assertividade() {
+export default function PredominanciaCerebral() {
   const [choicesArray, setChoicesArray] = React.useState([]);
-  const { control, handleSubmit, register } = useForm({});
+  const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
   React.useEffect(() => {
-    listQuestionsAPI('assertividade').then(response =>
+    listQuestionsAPI('cerebral').then(response =>
       setQuestions(response.data.questions)
     );
   }, []);
 
-  const { fields, replace, append } = useFieldArray({
+  const { replace, append } = useFieldArray({
     control,
-    name: 'assertividade',
+    name: 'predominanciaCerebral',
   });
 
   React.useEffect(() => {
@@ -53,8 +53,24 @@ export default function Assertividade() {
     answerQuestionsAPI({
       userId: '0d7d26f1-911f-4f1a-8c02-bba9e7b79900',
       choices: choicesArray,
-    }).then(() => history.push('/analiseGerencial/1'));
+    });
   };
+
+  const renderChoice = (choice, item) => (
+    <tr key={choice.id}>
+      <th>
+        <QuestionContainer key={choice.id}>
+          <Checkbox
+            size="lg"
+            colorScheme="orange"
+            onChange={() => handleAnswer(item, choice.id)}
+          >
+            <Typography variant="regular">{choice.sentence}</Typography>
+          </Checkbox>
+        </QuestionContainer>
+      </th>
+    </tr>
+  );
 
   const renderField = item => {
     const { choices } = item;
@@ -63,53 +79,7 @@ export default function Assertividade() {
         <Typography variant="regular" style={{ marginBottom: 8 }}>
           {item.sentence}
         </Typography>
-        <table>
-          <tr key={choices[0].id}>
-            <th>
-              <QuestionContainer key={choices[0].id}>
-                <Checkbox
-                  size="lg"
-                  colorScheme="orange"
-                  onChange={() => handleAnswer(item, choices[0].id)}
-                >
-                  <Typography variant="regular">
-                    {choices[0].sentence}
-                  </Typography>
-                </Checkbox>
-              </QuestionContainer>
-            </th>
-          </tr>
-          <tr key={choices[1].id}>
-            <th>
-              <QuestionContainer key={choices[1].id}>
-                <Checkbox
-                  size="lg"
-                  colorScheme="orange"
-                  onChange={() => handleAnswer(item, choices[1].id)}
-                >
-                  <Typography variant="regular">
-                    {choices[1].sentence}
-                  </Typography>
-                </Checkbox>
-              </QuestionContainer>
-            </th>
-          </tr>
-          <tr key={choices[2].id}>
-            <th>
-              <QuestionContainer key={choices[2].id}>
-                <Checkbox
-                  size="lg"
-                  colorScheme="orange"
-                  onChange={() => handleAnswer(item, choices[2].id)}
-                >
-                  <Typography variant="regular">
-                    {choices[2].sentence}
-                  </Typography>
-                </Checkbox>
-              </QuestionContainer>
-            </th>
-          </tr>
-        </table>
+        <table>{choices.map(choice => renderChoice(choice, item))}</table>
       </div>
     );
   };
@@ -129,8 +99,9 @@ export default function Assertividade() {
               marginBottom: '24px',
             }}
           >
-            Questionário Assertividade
+            Questionário Predominância Cerebral
           </Typography>
+
           <Typography
             variant="regular"
             style={{
@@ -138,9 +109,8 @@ export default function Assertividade() {
               marginBottom: '16px',
             }}
           >
-            As perguntas abaixo não tem por objetivo avaliar você. Servirão
-            apenas, para ajudá-lo(a) a compreender melhor alguns aspectos do seu
-            comportamento.
+            Responda com muita sinceridade as questões abaixo, selecione as
+            alternativas que mais te representam hoje.
           </Typography>
           <Typography
             variant="regular"
@@ -149,30 +119,26 @@ export default function Assertividade() {
               marginBottom: '24px',
             }}
           >
-            Selecione a anternativa que escolher. Quanto mais sincero(a) e
-            honesto(a) for, melhor para você.
+            Não tente "acertar" as respostas que parecem mais "adequadas" ou
+            "socialmente corretas". Para não distorcer o resultado, procure ser
+            bem verdadeiro e escolher a resposta mais adequada para você!
           </Typography>
-
           <Typography
             style={{
               textAlign: 'center',
               marginBottom: '24px',
             }}
           >
-            Procure colocar-se em cada situação abaixo e responda como se
-            comportaria realmente nelas. Declare o que você faz, habitualmente,
-            em situações idênticas e não o que gostaria de fazer. Se não houve
-            uma resposta que corresponda exatamente ao que faz, escolha a que
-            mais se aproxime do comportamento que teria naquela situação.
+            Essas questões são baseadas nos estudos de Ned Hermann.
           </Typography>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <form
-            className="assertividade-form"
+            className="predominanciaCerebral-form"
             onSubmit={handleSubmit(onSubmit)}
           >
-            {questions.map(item => renderField(item))}
+            {questions.map((item, index) => renderField(item, index))}
             <ButtonsContainer>
               <Button size="lg" variant="outline">
                 <Typography variant="accentRegular">Voltar</Typography>

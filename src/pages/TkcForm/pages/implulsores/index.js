@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
 import { Typography, InputBox, Button } from '~/components/atoms';
 import history from '~/services/history';
-import { answerQuestionsAPI, showCategoryAPI } from '../../apis';
+import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function Impulsores() {
@@ -10,7 +10,7 @@ export default function Impulsores() {
   const [questions, setQuestions] = React.useState([]);
 
   React.useEffect(() => {
-    showCategoryAPI('63341458-e6ac-4552-83e1-aa9c027e4afc').then(response =>
+    listQuestionsAPI('impulsores').then(response =>
       setQuestions(response.data.questions)
     );
   }, []);

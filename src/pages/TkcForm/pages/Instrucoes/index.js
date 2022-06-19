@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom';
 
 // CUSTOM IMPORTS
 import { Formik, Form } from 'formik';
+import Map from '../../../../assets/map.png';
 import { Container, LeftContainer, RightContainer } from './styles';
-import { Typography, Input, Button } from '../../../components/atoms';
-import YoutubeEmbed from '../../../utils/YoutubeEmbed';
-import Map from '../../../assets/map.png';
+import { Button, Input, Typography } from '~/components/atoms';
+import YoutubeEmbed from '~/utils/YoutubeEmbed';
 
 function Instrucoes() {
   const history = useHistory();
@@ -31,8 +31,8 @@ function Instrucoes() {
             email: '',
           }}
           onSubmit={values => {
-            history.push('/impulsores');
-            // alert(JSON.stringify(values, null, 2));
+            console.log(values);
+            // history.push('/impulsores');
           }}
         >
           <Form>
@@ -49,6 +49,24 @@ function Instrucoes() {
                 name="email"
                 placeholder="Insira seu email"
                 label="Email"
+              />
+              <Input
+                type="date"
+                name="birth_date"
+                placeholder="Insira sua data de nascimento"
+                label="Data de nascimento"
+              />
+              <Input
+                type="number"
+                name="daily_workload"
+                placeholder="Carga diária de trabalho (realizando, em horas)"
+                label="Carga diária de trabalho"
+              />
+              <Input
+                type="number"
+                name="retirement"
+                placeholder="Aposentadoria (com qual idade pretende reduzir a intensidade de trabalho)"
+                label="Idade em que pretende se aposentar"
               />
               <table>
                 <tr>

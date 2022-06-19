@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   rules: {
+    "react/no-unescaped-entities": "off",
     "array-callback-return": "off",
     "prettier/prettier": "error",
     "no-console": "off",
@@ -36,7 +37,6 @@ module.exports = {
     "no-underscore-dangle": "off",
     "eslint-disable-next-line": "off",
     camelcase: "off",
-    "no-console": ["error", { allow: ["tron"] }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn"
   },

@@ -5,15 +5,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { GlobalProvider } from '~/hooks/globalProvider';
 import Home from '../pages/Home';
-import Instructions from '../pages/TkcForm/Instrucoes';
-import Impulsores from '../pages/TkcForm/implulsores';
-import Motivadores from '../pages/TkcForm/motivadores';
+import Instructions from '../pages/TkcForm/pages/instrucoes';
+import Impulsores from '../pages/TkcForm/pages/implulsores';
+import Motivadores from '../pages/TkcForm/pages/motivadores';
 import Assertividade from '~/pages/TkcForm/pages/assertividade';
-import TomadaDecisao from '~/pages/TkcForm/pages/analiseGerencial/pages/tomadaDecisao';
-import Programacao from '~/pages/TkcForm/pages/analiseGerencial/pages/programacaoAtividades';
-import Execucao from '~/pages/TkcForm/pages/analiseGerencial/pages/execucaoAtividades';
-import Controle from '~/pages/TkcForm/pages/analiseGerencial/pages/controleAtividades';
-import Organizacionais from '~/pages/TkcForm/pages/analiseGerencial/pages/mudancasOrganizacionais';
+import AnaliseGerencial from '~/pages/TkcForm/pages/analiseGerencial';
+import PredominanciaCerebral from '~/pages/TkcForm/pages/predominanciaCerebral';
 
 export default function Routes() {
   return (
@@ -26,14 +23,15 @@ export default function Routes() {
             <Route path="/impulsores" exact component={Impulsores} />
             <Route path="/motivadores" exact component={Motivadores} />
             <Route path="/assertividade" exact component={Assertividade} />
-            <Route path="/analiseGerencial/1" exact component={TomadaDecisao} />
-            <Route path="/analiseGerencial/2" exact component={Programacao} />
-            <Route path="/analiseGerencial/3" exact component={Execucao} />
-            <Route path="/analiseGerencial/4" exact component={Controle} />
             <Route
-              path="/analiseGerencial/5"
+              path="/analiseGerencial"
               exact
-              component={Organizacionais}
+              component={AnaliseGerencial}
+            />
+            <Route
+              path="/predominanciaCerebral"
+              exact
+              component={PredominanciaCerebral}
             />
           </GlobalProvider>
         </ChakraProvider>
