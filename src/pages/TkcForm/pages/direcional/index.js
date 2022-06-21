@@ -6,20 +6,20 @@ import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import history from '~/services/history';
 
-export default function Autoresponsabilidade() {
+export default function Direcional() {
   const [choicesArray, setChoicesArray] = React.useState([]);
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
   React.useEffect(() => {
-    listQuestionsAPI('Autorresponsabilidade').then(response =>
+    listQuestionsAPI('direcional').then(response =>
       setQuestions(response.data.questions)
     );
   }, []);
 
   const { replace, append } = useFieldArray({
     control,
-    name: 'autoresponsabilidade',
+    name: 'direcional',
   });
 
   React.useEffect(() => {
@@ -64,9 +64,9 @@ export default function Autoresponsabilidade() {
           {item.sentence}
         </Typography>
         <table>
-          <tr key={item.id}>
+          <tr key={choices[0].id}>
             <th>
-              <QuestionContainer key={item.id}>
+              <QuestionContainer key={choices[0].id}>
                 <Checkbox
                   size="lg"
                   colorScheme="orange"
@@ -74,6 +74,36 @@ export default function Autoresponsabilidade() {
                 >
                   <Typography variant="regular">
                     {choices[0].sentence}
+                  </Typography>
+                </Checkbox>
+              </QuestionContainer>
+            </th>
+          </tr>
+          <tr key={choices[1].id}>
+            <th>
+              <QuestionContainer key={choices[1].id}>
+                <Checkbox
+                  size="lg"
+                  colorScheme="orange"
+                  onChange={() => handleAnswer(item, choices[1].id)}
+                >
+                  <Typography variant="regular">
+                    {choices[1].sentence}
+                  </Typography>
+                </Checkbox>
+              </QuestionContainer>
+            </th>
+          </tr>
+          <tr key={choices[2].id}>
+            <th>
+              <QuestionContainer key={choices[2].id}>
+                <Checkbox
+                  size="lg"
+                  colorScheme="orange"
+                  onChange={() => handleAnswer(item, choices[2].id)}
+                >
+                  <Typography variant="regular">
+                    {choices[2].sentence}
                   </Typography>
                 </Checkbox>
               </QuestionContainer>
@@ -99,7 +129,7 @@ export default function Autoresponsabilidade() {
               marginBottom: '24px',
             }}
           >
-            Questionário de Autoresponsabilidade
+            Questionário Direcional
           </Typography>
           <Typography
             variant="regular"
@@ -108,16 +138,16 @@ export default function Autoresponsabilidade() {
               marginBottom: '16px',
             }}
           >
-            Não há respostas certas ou erradas. Selecione as opções que você
-            costuma repetir com frequência diária, semanal ou quinzenal.
+            Leia cada frase, e selecione uma das opções (nada, não muito, um
+            pouco, bastante, totalmente) que lhe pareça mais indicada. NÃO
+            reflita demais sobre as frases. Em vez disso, compare a si mesmo com
+            as "pessoas em geral" - e não somente com colegas de trabalho,
+            amigos ou parentes.
           </Typography>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <form
-            className="autoresponsabilidade-form"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form className="direcional-form" onSubmit={handleSubmit(onSubmit)}>
             {questions.map(item => renderField(item))}
             <ButtonsContainer>
               <Button size="lg" variant="outline">

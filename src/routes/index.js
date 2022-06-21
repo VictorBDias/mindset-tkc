@@ -14,7 +14,8 @@ import PredominanciaCerebral from '~/pages/TkcForm/pages/predominanciaCerebral';
 import GestaoTempo from '~/pages/TkcForm/pages/gestaoTempo';
 import Intensidade from '~/pages/TkcForm/pages/intensidade';
 import Conexao from '~/pages/TkcForm/pages/conexao';
-import Autoresponsabilidade from '~/pages/TkcForm/pages/autoresponsabilidade';
+import Autorresponsabilidade from '~/pages/TkcForm/pages/autorrresponsabilidade';
+import Direcional from '~/pages/TkcForm/pages/direcional';
 
 export default function Routes() {
   return (
@@ -41,13 +42,13 @@ export default function Routes() {
             <Route path="/intensidade" exact component={Intensidade} />
             <Route path="/conexao" exact component={Conexao} />
             <Route
-              path="/autoresponsabilidade"
+              path="/autorresponsabilidade"
               exact
-              component={Autoresponsabilidade}
+              component={Autorresponsabilidade}
             />
+            <Route path="/direcional" exact component={Direcional} />
           </GlobalProvider>
         </ChakraProvider>
-        {/* <Route path="/" component={() => <h1>404! PAGE NOT FOUND</h1>} /> */}
       </Switch>
     </BrowserRouter>
   );

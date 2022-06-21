@@ -4,10 +4,24 @@ import PropTypes from 'prop-types';
 // CUSTOM IMPORTS
 import { Container, SelectField } from './styles';
 
-const InputBox = ({ options, onChange, ...rest }) => {
-  // console.log({ ...rest });
+const InputBox = ({ options, onChange, size }) => {
+  const formatOptions = () => {
+    const auxArray = [];
+    options.map(option => {
+      if (option.label) {
+        auxArray.push(option);
+      } else {
+        auxArray.push({
+          ...option,
+          label: option.sentence,
+        });
+      }
+    });
+    return auxArray;
+  };
+
   return (
-    <Container style={{ width: 80, marginRight: 20 }}>
+    <Container style={{ minWidth: size, marginRight: 20 }}>
       <SelectField
         onChange={onChange}
         options={options}
@@ -19,11 +33,13 @@ const InputBox = ({ options, onChange, ...rest }) => {
 
 InputBox.propTypes = {
   options: PropTypes.array.isRequired,
-  placeholder: PropTypes.string,
+  onChange: PropTypes.func,
+  size: PropTypes.number,
 };
 
 InputBox.defaultProps = {
-  placeholder: null,
+  onChange: () => {},
+  size: 80,
 };
 
 export { InputBox };
