@@ -12,9 +12,7 @@
 <p align="center">Evaluative survey site to help people better understand their mindset and areas for improvement.</p>
 
 ## 📋 Prototype
-```
 [Adobe XD](https://xd.adobe.com/view/1cd00465-5018-4347-94a0-cea970e02810-4983/)
-```
 
 ## 📦 Installation
 
