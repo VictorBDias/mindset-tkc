@@ -11,12 +11,12 @@
 <h1 align="center">Mindset TKC</h1>
 <p align="center">Evaluative survey site to help people better understand their mindset and areas for improvement.</p>
 
-### **📋 Prototype**
+## 📋 Prototype
 ```
-  https://xd.adobe.com/view/1cd00465-5018-4347-94a0-cea970e02810-4983/screen/eb70677d-07c0-4205-89ba-628b0f5b6de4
+[Adobe XD](https://xd.adobe.com/view/1cd00465-5018-4347-94a0-cea970e02810-4983/)
 ```
 
-## :package: Installation
+## 📦 Installation
 
 ### **Cloning the repository**
 
