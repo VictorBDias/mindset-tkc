@@ -3,13 +3,32 @@ import { useHistory } from 'react-router-dom';
 
 // CUSTOM IMPORTS
 import { Formik, Form } from 'formik';
+import toast from 'react-hot-toast';
 import Map from '../../../../assets/map.png';
 import { Container, LeftContainer, RightContainer } from './styles';
 import { Button, Input, Typography } from '~/components/atoms';
 import YoutubeEmbed from '~/utils/YoutubeEmbed';
+import { createUserAPI } from './apis';
 
 function Instrucoes() {
+  const notifySuccess = () => toast.success('Usuário cadastrado!');
   const history = useHistory();
+  const persistedToken = localStorage.getItem('token');
+
+  const handleSubmmit = async data => {
+    try {
+      const response = await createUserAPI({
+        ...data,
+        token: persistedToken,
+      });
+      notifySuccess();
+      history.push('/impulsores');
+      return response;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Container>
       <div style={{ display: 'row' }}>
@@ -30,10 +49,7 @@ function Instrucoes() {
             name: '',
             email: '',
           }}
-          onSubmit={values => {
-            console.log(values);
-            history.push('/impulsores');
-          }}
+          onSubmit={values => handleSubmmit(values)}
         >
           <Form>
             <LeftContainer>
@@ -42,6 +58,7 @@ function Instrucoes() {
                 name="name"
                 placeholder="Insira seu nome"
                 label="Nome"
+                required
               />
 
               <Input
@@ -49,24 +66,28 @@ function Instrucoes() {
                 name="email"
                 placeholder="Insira seu email"
                 label="Email"
+                required
               />
               <Input
                 type="date"
                 name="birth_date"
                 placeholder="Insira sua data de nascimento"
                 label="Data de nascimento"
+                required
               />
               <Input
                 type="number"
                 name="daily_workload"
                 placeholder="Carga diária de trabalho (realizando, em horas)"
                 label="Carga diária de trabalho"
+                required
               />
               <Input
                 type="number"
                 name="retirement"
                 placeholder="Aposentadoria (com qual idade pretende reduzir a intensidade de trabalho)"
                 label="Idade em que pretende se aposentar"
+                required
               />
               <table>
                 <tr>

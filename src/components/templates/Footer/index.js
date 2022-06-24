@@ -1,11 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 
 // CUSTOM IMPORTS
 import { Container, Content } from './styles';
 import { Typography } from '~/components/atoms';
 
-export default function Header() {
+export default function Footer() {
   return (
     <Container>
       <Content>
@@ -20,6 +19,6 @@ export default function Header() {
   );
 }
 
-Header.propTypes = {};
+Footer.propTypes = {};
 
-Header.defaultProps = {};
+Footer.defaultProps = {};

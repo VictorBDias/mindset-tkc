@@ -176,9 +176,9 @@ export default function Motivadores() {
           <form className="motivadores-form" onSubmit={handleSubmit(onSubmit)}>
             {fields.map((item, index) => renderField(item, index))}
             <ButtonsContainer>
-              <Button size="lg" variant="outline">
+              {/* <Button size="lg" variant="outline">
                 <Typography variant="accentRegular">Voltar</Typography>
-              </Button>
+              </Button> */}
               <Button size="lg" variant="solid" type="submit">
                 <Typography variant="whiteRegular">Avançar</Typography>
               </Button>

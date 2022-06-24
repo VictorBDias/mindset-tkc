@@ -5,21 +5,6 @@ import PropTypes from 'prop-types';
 import { Container, SelectField } from './styles';
 
 const InputBox = ({ options, onChange, size }) => {
-  const formatOptions = () => {
-    const auxArray = [];
-    options.map(option => {
-      if (option.label) {
-        auxArray.push(option);
-      } else {
-        auxArray.push({
-          ...option,
-          label: option.sentence,
-        });
-      }
-    });
-    return auxArray;
-  };
-
   return (
     <Container style={{ minWidth: size, marginRight: 20 }}>
       <SelectField

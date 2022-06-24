@@ -14,15 +14,8 @@ export const Container = styled.div`
     text-align: left;
   }
 
-  tr:nth-child(odd) {
-    background-color: #dee1e5e2;
-  }
   tr:nth-child(even) {
-    background-color: #c5cdd8;
-  }
-
-  .chakra-checkbox__control {
-    border: 2px solid #000;
+    background-color: #dee1e5e2;
   }
 `;
 
@@ -36,6 +29,6 @@ export const QuestionContainer = styled.div`
 
 export const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 24px;
 `;

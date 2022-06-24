@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 // CUSTOM IMPORTS
 import { Formik, Form } from 'formik';
@@ -9,11 +10,22 @@ import YoutubeEmbed from '../../utils/YoutubeEmbed';
 import { validateTokenAPI } from './apis';
 
 function Home() {
+  const notifySuccess = () => toast.success('Token validado!');
+  const notifyError = () => toast.error('Token inválido ou expirado!');
   const history = useHistory();
 
-  const handleSubmit = data => {
-    validateTokenAPI(data.token).then(response => console.log(response));
-    // history.push('/instrucoes')
+  const handleSubmmit = async data => {
+    try {
+      const response = await validateTokenAPI(data.token);
+      localStorage.setItem('token', data.token);
+      notifySuccess();
+      window.setTimeout(() => {
+        history.push('/instrucoes');
+      }, 1000);
+      return response;
+    } catch (e) {
+      notifyError();
+    }
   };
 
   return (
@@ -35,7 +47,7 @@ function Home() {
           initialValues={{
             token: '',
           }}
-          onSubmit={data => handleSubmit(data)}
+          onSubmit={data => handleSubmmit(data)}
         >
           <div
             style={{

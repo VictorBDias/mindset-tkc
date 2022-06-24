@@ -109,9 +109,9 @@ export default function GestaoTempo() {
           <table>{fields.map((item, index) => renderField(item, index))}</table>
 
           <ButtonsContainer>
-            <Button size="lg" variant="outline">
+                        {/* <Button size="lg" variant="outline">
               <Typography variant="accentRegular">Voltar</Typography>
-            </Button>
+            </Button> */}
             <Button size="lg" variant="solid" type="submit">
               <Typography variant="whiteRegular">Avançar</Typography>
             </Button>
