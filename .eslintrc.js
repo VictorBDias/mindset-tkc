@@ -22,7 +22,6 @@ module.exports = {
     "consistent-return": "off",
     "array-callback-return": "off",
     "react/no-unescaped-entities": "off",
-    "array-callback-return": "off",
     "prettier/prettier": "error",
     "no-console": "off",
     "react/jsx-props-no-spreading": "off",

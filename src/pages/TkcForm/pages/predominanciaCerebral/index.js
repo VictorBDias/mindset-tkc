@@ -4,7 +4,6 @@ import { Checkbox } from '@chakra-ui/react';
 import { Typography, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
-import history from '~/services/history';
 import { useGlobal } from '~/hooks/globalProvider';
 
 export default function PredominanciaCerebral() {
