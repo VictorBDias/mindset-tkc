@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { useGlobal } from '~/hooks/globalProvider';
 import { Typography, InputBox, Button } from '~/components/atoms';
-import history from '~/services/history';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function Autorresponsabilidade() {
+  const history = useHistory();
   const { userId } = useGlobal();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
@@ -72,7 +73,7 @@ export default function Autorresponsabilidade() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    }).then(() => history.push('/motivadores'));
+    }).then(() => history.push('/direcional'));
   };
 
   const onSubmit = data => handleFormatAnswerData(data);

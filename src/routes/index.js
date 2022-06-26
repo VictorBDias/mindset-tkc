@@ -14,7 +14,7 @@ import PredominanciaCerebral from '~/pages/TkcForm/pages/predominanciaCerebral';
 import GestaoTempo from '~/pages/TkcForm/pages/gestaoTempo';
 import Intensidade from '~/pages/TkcForm/pages/intensidade';
 import Conexao from '~/pages/TkcForm/pages/conexao';
-import Autorresponsabilidade from '~/pages/TkcForm/pages/autorrresponsabilidade';
+import Autorresponsabilidade from '~/pages/TkcForm/pages/autorresponsabilidade';
 import Direcional from '~/pages/TkcForm/pages/direcional';
 import { GenerateTokenPage } from '~/pages/admin/GenerateToken';
 
