@@ -5,10 +5,13 @@ import { Typography, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import history from '~/services/history';
+import { useGlobal } from '~/hooks/globalProvider';
 
 export default function Assertividade() {
-  const [choicesArray, setChoicesArray] = React.useState([]);
+  const { userId } = useGlobal();
   const { control, handleSubmit } = useForm({});
+
+  const [choicesArray, setChoicesArray] = React.useState([]);
   const [questions, setQuestions] = React.useState([]);
 
   React.useEffect(() => {
@@ -51,7 +54,7 @@ export default function Assertividade() {
 
   const handleFormatAnswerData = () => {
     answerQuestionsAPI({
-      userId: '0d7d26f1-911f-4f1a-8c02-bba9e7b79900',
+      userId,
       choices: choicesArray,
     }).then(() => history.push('/analiseGerencial/1'));
   };

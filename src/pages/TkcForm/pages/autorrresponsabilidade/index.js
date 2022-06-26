@@ -1,11 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useGlobal } from '~/hooks/globalProvider';
 import { Typography, InputBox, Button } from '~/components/atoms';
 import history from '~/services/history';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function Autorresponsabilidade() {
+  const { userId } = useGlobal();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -68,7 +70,7 @@ export default function Autorresponsabilidade() {
     });
 
     answerQuestionsAPI({
-      userId: '0d7d26f1-911f-4f1a-8c02-bba9e7b79900',
+      userId,
       choices: choicesArray,
     }).then(() => history.push('/motivadores'));
   };

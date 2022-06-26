@@ -21,6 +21,7 @@ function Instrucoes() {
         ...data,
         token: persistedToken,
       });
+      localStorage.setItem('userId', response.data.id);
       notifySuccess();
       history.push('/impulsores');
       return response;

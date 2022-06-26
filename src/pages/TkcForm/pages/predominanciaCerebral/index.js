@@ -5,9 +5,11 @@ import { Typography, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import history from '~/services/history';
+import { useGlobal } from '~/hooks/globalProvider';
 
 export default function PredominanciaCerebral() {
   const [choicesArray, setChoicesArray] = React.useState([]);
+  const { userId } = useGlobal();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -51,7 +53,7 @@ export default function PredominanciaCerebral() {
 
   const handleFormatAnswerData = () => {
     answerQuestionsAPI({
-      userId: '0d7d26f1-911f-4f1a-8c02-bba9e7b79900',
+      userId,
       choices: choicesArray,
     });
   };

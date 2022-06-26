@@ -21,6 +21,7 @@ function Home() {
       notifySuccess();
       window.setTimeout(() => {
         history.push('/instrucoes');
+        window.location.reload();
       }, 1000);
       return response;
     } catch (e) {
