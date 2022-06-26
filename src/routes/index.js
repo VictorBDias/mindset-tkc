@@ -17,6 +17,8 @@ import Conexao from '~/pages/TkcForm/pages/conexao';
 import Autorresponsabilidade from '~/pages/TkcForm/pages/autorresponsabilidade';
 import Direcional from '~/pages/TkcForm/pages/direcional';
 import { GenerateTokenPage } from '~/pages/admin/GenerateToken';
+import { Feedback } from '~/pages/Feedback';
+import { ChartJs } from '~/pages/ChartJs';
 
 export default function Routes() {
   const localStorageToken = localStorage.getItem('token');
@@ -58,6 +60,7 @@ export default function Routes() {
               exact
               component={GenerateTokenPage}
             />
+            <Route path="/feedback" exact component={ChartJs} />
           </GlobalProvider>
         </ChakraProvider>
       </Switch>
