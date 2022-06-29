@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   rules: {
+    "react/prop-types": "off",
     "consistent-return": "off",
     "array-callback-return": "off",
     "react/no-unescaped-entities": "off",

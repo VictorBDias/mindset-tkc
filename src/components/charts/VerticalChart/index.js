@@ -19,11 +19,7 @@ ChartJS.register(
   Legend
 );
 
-const labels = ['Perfeição', 'Esforço', 'Força', 'Apressado', 'Agradável'];
-
-const values = [16, 22, 16, 23, 21];
-
-export const VerticalBar = () => {
+export const VerticalChart = ({ labels, values }) => {
   const data = {
     labels,
     datasets: [

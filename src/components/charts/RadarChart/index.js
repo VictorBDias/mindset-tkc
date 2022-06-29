@@ -20,30 +20,21 @@ ChartJS.register(
   Legend
 );
 
-export const data = {
-  labels: [
-    'Expressão de medo',
-    'Expressão de negação',
-    'Expressão de alegria',
-    'Expressão de tristeza',
-    'Expressão de defesa de direitos',
-    'Expressão de raiva',
-    'Expressão de amor',
-  ],
-  datasets: [
-    {
-      label: '%',
-      data: [75, 50, 100, 75, 50, 25, 100],
-      borderColor: '#2B69D9',
-      borderWidth: 2,
-    },
-  ],
-};
+export const RadarChart = ({ labels, values }) => {
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: '%',
+        data: values,
+        borderColor: '#2B69D9',
+        borderWidth: 2,
+      },
+    ],
+  };
 
-export const RadarChart = () => {
   return (
     <div style={{ width: 600 }}>
-      <Typography variant="title">Assertividade</Typography>
       <Radar data={data} />
     </div>
   );
