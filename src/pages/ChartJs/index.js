@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { HorizontalChart } from '~/components/charts/HorizontalChart';
-import { PieChart } from '~/components/charts/PieChart';
-import { RadarChart } from '~/components/charts/RadarChart';
-import { VerticalChart } from '~/components/charts/VerticalChart';
+import { Typography } from '~/components/atoms';
+import {
+  HorizontalChart,
+  RadarChart,
+  PieChart,
+  VerticalChart,
+  DoubleVerticalChart,
+} from '~/components/charts';
 
 import { useGlobal } from '~/hooks/globalProvider';
 import { getUserFeedbackAPI } from './apis';
 import { useChartValues } from './helpers';
 
-import { ChartContainer, Container } from './styles';
+import { ChartContainer, Container, RowContainer } from './styles';
 
 export const ChartJs = () => {
   const { userId } = useGlobal();
-  const { handleCategoryValues } = useChartValues();
+  const { handleCategoryValues, handleCategoryAverage } = useChartValues();
 
   //* STATES
   const [impulsores, setImpulsores] = useState();
   const [motivadores, setMotivadores] = useState();
   const [assertividade, setAssertividade] = useState();
+  const [analiseGerencial, setAnaliseGerencial] = useState();
 
   useEffect(() => {
     if (userId)
@@ -40,13 +45,45 @@ export const ChartJs = () => {
       );
   }, [userId]);
 
+  useEffect(() => {
+    if (userId)
+      getUserFeedbackAPI({ category: 'gerencial', userId }).then(response =>
+        setAnaliseGerencial(response.data)
+      );
+  }, [userId]);
+
   return (
     <Container>
       <ChartContainer>
+        {/* <Typography variant="subtitle">Impulsores</Typography> */}
         <VerticalChart
           labels={['Perfeição', 'Esforço', 'Força', 'Apressado', 'Agradável']}
           values={handleCategoryValues(impulsores)}
         />
+        <div style={{ display: 'row', marginTop: -200, marginLeft: 36 }}>
+          <Typography variant="subTitle">Nivel atual dos impulsores</Typography>
+          <RowContainer>
+            {/* impulsores.reports.performance */}
+            <Typography>Perfeição</Typography>
+            <Typography>80%</Typography>
+          </RowContainer>
+          <RowContainer>
+            <Typography>Esforço</Typography>
+            <Typography>90%</Typography>
+          </RowContainer>
+          <RowContainer>
+            <Typography>Força</Typography>
+            <Typography>80%</Typography>
+          </RowContainer>
+          <RowContainer>
+            <Typography>Apressado</Typography>
+            <Typography>85%</Typography>
+          </RowContainer>
+          <RowContainer>
+            <Typography>Agradável</Typography>
+            <Typography>95%</Typography>
+          </RowContainer>
+        </div>
       </ChartContainer>
       <ChartContainer>
         <HorizontalChart
@@ -59,6 +96,19 @@ export const ChartJs = () => {
           ]}
           values={handleCategoryValues(motivadores)}
         />
+
+        <div style={{ display: 'row', marginTop: -200, marginLeft: 36 }}>
+          <Typography>A poha de uma piramide</Typography>
+          <RowContainer>
+            <Typography>Potencial Atual: </Typography>
+            <Typography>motivadores.potential%</Typography>
+          </RowContainer>
+
+          <RowContainer>
+            <Typography>Potencial Máximo: </Typography>
+            <Typography>100%</Typography>
+          </RowContainer>
+        </div>
       </ChartContainer>
 
       <ChartContainer>
@@ -77,6 +127,13 @@ export const ChartJs = () => {
         <PieChart
           labels={['Atual', 'Necessidade']}
           needValue={assertividade && assertividade.need}
+        />
+      </ChartContainer>
+      <ChartContainer>
+        <DoubleVerticalChart
+          atualData={handleCategoryValues(analiseGerencial)}
+          idealData={handleCategoryAverage(analiseGerencial)}
+          labels={analiseGerencial && analiseGerencial.groups}
         />
       </ChartContainer>
     </Container>

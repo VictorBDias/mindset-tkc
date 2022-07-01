@@ -10,5 +10,14 @@ export const useChartValues = () => {
     return auxArray;
   };
 
-  return { handleCategoryValues };
+  const handleCategoryAverage = impulsores => {
+    const auxArray = [];
+    if (impulsores)
+      impulsores.reports.map(report => {
+        auxArray.push(report.avg);
+      });
+    return auxArray;
+  };
+
+  return { handleCategoryValues, handleCategoryAverage };
 };

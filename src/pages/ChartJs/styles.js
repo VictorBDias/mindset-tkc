@@ -12,3 +12,9 @@ export const ChartContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const RowContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;

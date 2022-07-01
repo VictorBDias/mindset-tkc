@@ -19,14 +19,19 @@ ChartJS.register(
   Legend
 );
 
-export const VerticalChart = ({ labels, values }) => {
+export const DoubleVerticalChart = ({ labels, atualData, idealData }) => {
   const data = {
     labels,
     datasets: [
       {
-        label: 'Impulsores',
-        data: values,
+        label: 'Atual',
+        data: atualData,
         backgroundColor: '#2B69D9',
+      },
+      {
+        label: 'Ideal',
+        data: idealData,
+        backgroundColor: 'rgba(255, 159, 64, 1)',
       },
     ],
   };
