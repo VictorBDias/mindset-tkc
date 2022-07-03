@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Typography } from '~/components/atoms';
+import PiramideMaslow from '../../assets/PiramideMaslow.png';
 import {
   HorizontalChart,
   RadarChart,
@@ -16,7 +17,11 @@ import { ChartContainer, Container, RowContainer } from './styles';
 
 export const ChartJs = () => {
   const { userId } = useGlobal();
-  const { handleCategoryValues, handleCategoryAverage } = useChartValues();
+  const {
+    handleCategoryValues,
+    handleCategoryAverage,
+    handleImpulsoresCategoryName,
+  } = useChartValues();
 
   //* STATES
   const [impulsores, setImpulsores] = useState();
@@ -52,90 +57,108 @@ export const ChartJs = () => {
       );
   }, [userId]);
 
+  const renderImpulsoresReports = reports => {
+    if (reports)
+      return (
+        <RowContainer>
+          <Typography>{handleImpulsoresCategoryName(reports.group)}</Typography>
+          <Typography>{reports.performance}</Typography>
+        </RowContainer>
+      );
+  };
+
   return (
     <Container>
-      <ChartContainer>
-        {/* <Typography variant="subtitle">Impulsores</Typography> */}
-        <VerticalChart
-          labels={['Perfeição', 'Esforço', 'Força', 'Apressado', 'Agradável']}
-          values={handleCategoryValues(impulsores)}
-        />
-        <div style={{ display: 'row', marginTop: -200, marginLeft: 36 }}>
-          <Typography variant="subTitle">Nivel atual dos impulsores</Typography>
-          <RowContainer>
-            {/* impulsores.reports.performance */}
-            <Typography>Perfeição</Typography>
-            <Typography>80%</Typography>
-          </RowContainer>
-          <RowContainer>
-            <Typography>Esforço</Typography>
-            <Typography>90%</Typography>
-          </RowContainer>
-          <RowContainer>
-            <Typography>Força</Typography>
-            <Typography>80%</Typography>
-          </RowContainer>
-          <RowContainer>
-            <Typography>Apressado</Typography>
-            <Typography>85%</Typography>
-          </RowContainer>
-          <RowContainer>
-            <Typography>Agradável</Typography>
-            <Typography>95%</Typography>
-          </RowContainer>
-        </div>
-      </ChartContainer>
-      <ChartContainer>
-        <HorizontalChart
-          labels={[
-            'Auto-realização',
-            'Auto-estima',
-            'Associação',
-            'Segurança',
-            'Fisiológicas',
-          ]}
-          values={handleCategoryValues(motivadores)}
-        />
+      {/* ================= IMPULSORES =============== */}
+      {impulsores && (
+        <ChartContainer>
+          <VerticalChart
+            labels={['Perfeição', 'Esforço', 'Força', 'Apressado', 'Agradável']}
+            values={handleCategoryValues(impulsores)}
+          />
+          <div style={{ display: 'row', marginTop: -200, marginLeft: 36 }}>
+            <Typography variant="subTitle">
+              Nivel atual dos impulsores
+            </Typography>
+            {impulsores.reports.map(report => renderImpulsoresReports(report))}
+          </div>
+        </ChartContainer>
+      )}
 
-        <div style={{ display: 'row', marginTop: -200, marginLeft: 36 }}>
-          <Typography>A poha de uma piramide</Typography>
-          <RowContainer>
-            <Typography>Potencial Atual: </Typography>
-            <Typography>motivadores.potential%</Typography>
-          </RowContainer>
+      {/* ================= MOTIVADORES =============== */}
+      {motivadores && (
+        <ChartContainer>
+          <HorizontalChart
+            labels={[
+              'Auto-realização',
+              'Auto-estima',
+              'Associação',
+              'Segurança',
+              'Fisiológicas',
+            ]}
+            values={handleCategoryValues(motivadores)}
+          />
 
-          <RowContainer>
-            <Typography>Potencial Máximo: </Typography>
-            <Typography>100%</Typography>
-          </RowContainer>
-        </div>
-      </ChartContainer>
+          <div
+            style={{
+              display: 'row',
+              marginTop: -200,
+              marginLeft: 36,
+              width: 400,
+            }}
+          >
+            <img
+              src={PiramideMaslow}
+              alt="logo"
+              width="400"
+              height="400"
+              style={{ marginBottom: 24 }}
+            />
+            <RowContainer>
+              <Typography>Potencial Atual: </Typography>
+              <Typography>{`${motivadores.potential}%`}</Typography>
+            </RowContainer>
+            <RowContainer>
+              <Typography>Potencial Máximo: </Typography>
+              <Typography>100%</Typography>
+            </RowContainer>
+          </div>
+        </ChartContainer>
+      )}
 
-      <ChartContainer>
-        <RadarChart
-          labels={[
-            'Expressão de medo',
-            'Expressão de negação',
-            'Expressão de alegria',
-            'Expressão de tristeza',
-            'Expressão de defesa de direitos',
-            'Expressão de raiva',
-            'Expressão de amor',
-          ]}
-          values={handleCategoryValues(assertividade)}
-        />
-        <PieChart
-          labels={['Atual', 'Necessidade']}
-          needValue={assertividade && assertividade.need}
-        />
-      </ChartContainer>
-      <ChartContainer>
-        <DoubleVerticalChart
-          atualData={handleCategoryValues(analiseGerencial)}
-          idealData={handleCategoryAverage(analiseGerencial)}
-          labels={analiseGerencial && analiseGerencial.groups}
-        />
-      </ChartContainer>
+      {/* ================= ASSERTIVIDADE =============== */}
+      {assertividade && (
+        <ChartContainer style={{ marginTop: -60 }}>
+          <RadarChart
+            title="Assertividade"
+            labels={[
+              'Expressão de medo',
+              'Expressão de negação',
+              'Expressão de alegria',
+              'Expressão de tristeza',
+              'Expressão de defesa de direitos',
+              'Expressão de raiva',
+              'Expressão de amor',
+            ]}
+            values={handleCategoryValues(assertividade)}
+          />
+          <PieChart
+            labels={['Atual', 'Necessidade']}
+            needValue={assertividade && assertividade.need}
+          />
+        </ChartContainer>
+      )}
+
+      {/* ================= ANALISE GERENCIAL =============== */}
+      {analiseGerencial && (
+        <ChartContainer>
+          <DoubleVerticalChart
+            atualData={handleCategoryValues(analiseGerencial)}
+            idealData={handleCategoryAverage(analiseGerencial)}
+            labels={analiseGerencial && analiseGerencial.groups}
+          />
+        </ChartContainer>
+      )}
     </Container>
   );
 };

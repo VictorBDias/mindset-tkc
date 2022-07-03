@@ -19,5 +19,31 @@ export const useChartValues = () => {
     return auxArray;
   };
 
-  return { handleCategoryValues, handleCategoryAverage };
+  const handleImpulsoresCategoryName = group => {
+    switch (group) {
+      case 'P':
+        return 'PERFEIÇÃO';
+
+      case 'E':
+        return 'ESFORÇO';
+
+      case 'F':
+        return 'FORÇA';
+
+      case 'AP':
+        return 'APRESSADO';
+
+      case 'AG':
+        return 'AGRADÁVEL';
+
+      default:
+        return 'PERFEIÇÃO';
+    }
+  };
+
+  return {
+    handleCategoryValues,
+    handleCategoryAverage,
+    handleImpulsoresCategoryName,
+  };
 };

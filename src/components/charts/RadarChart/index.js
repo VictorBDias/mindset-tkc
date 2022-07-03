@@ -9,7 +9,6 @@ import {
   Legend,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-import { Typography } from '~/components/atoms';
 
 ChartJS.register(
   RadialLinearScale,
@@ -20,12 +19,12 @@ ChartJS.register(
   Legend
 );
 
-export const RadarChart = ({ labels, values }) => {
+export const RadarChart = ({ title, labels, values }) => {
   const data = {
     labels,
     datasets: [
       {
-        label: '%',
+        label: title,
         data: values,
         borderColor: '#2B69D9',
         borderWidth: 2,
