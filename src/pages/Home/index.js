@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 // CUSTOM IMPORTS

@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { useGlobal } from '~/hooks/globalProvider';
+import { useHistory, useParams } from 'react-router-dom';
 import { Typography, InputBox, Button } from '~/components/atoms';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function Conexao() {
   const history = useHistory();
-  const { userId } = useGlobal();
+  const { userId } = useParams();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -69,7 +68,7 @@ export default function Conexao() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    }).then(() => history.push('/autorresponsabilidade'));
+    }).then(() => history.push(`/autorresponsabilidade/${userId}`));
   };
 
   const onSubmit = data => handleFormatAnswerData(data);
@@ -86,7 +85,7 @@ export default function Conexao() {
             marginBottom: '24px',
           }}
         >
-          Questionário conexao
+          Diagnóstico de Conexão
         </Typography>
         <Typography
           variant="regular"
@@ -105,8 +104,8 @@ export default function Conexao() {
             marginBottom: '24px',
           }}
         >
-          0 - DISCORDO TOTALMENTE 1 - DISCORDO EM BOA PARTE 2 - NÃO CONCORDO NEM
-          DISCORDO 3 - CONCORDO EM BOA PARTE 4 - CONCORDO TOTALMENTE
+          1 - DISCORDO TOTALMENTE 2 - DISCORDO EM BOA PARTE 3 - NÃO CONCORDO NEM
+          DISCORDO 4 - CONCORDO EM BOA PARTE 5 - CONCORDO TOTALMENTE
         </Typography>
         <form className="conexao-form" onSubmit={handleSubmit(onSubmit)}>
           <table>{fields.map((item, index) => renderField(item, index))}</table>

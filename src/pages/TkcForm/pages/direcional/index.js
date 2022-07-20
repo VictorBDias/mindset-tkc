@@ -1,13 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { useGlobal } from '~/hooks/globalProvider';
+import { useHistory, useParams } from 'react-router-dom';
 import { Typography, InputBox, Button } from '~/components/atoms';
-import history from '~/services/history';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function Direcional() {
-  const { userId } = useGlobal();
+  const history = useHistory();
+  const { userId } = useParams();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -68,7 +68,7 @@ export default function Direcional() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    }).then(() => history.push('/motivadores'));
+    }).then(() => history.push(`/feedback/${userId}`));
   };
 
   const onSubmit = data => handleFormatAnswerData(data);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Typography } from '~/components/atoms';
 import PiramideMaslow from '../../assets/PiramideMaslow.png';
 import {
@@ -9,14 +10,13 @@ import {
   DoubleVerticalChart,
 } from '~/components/charts';
 
-import { useGlobal } from '~/hooks/globalProvider';
 import { getUserFeedbackAPI } from './apis';
 import { useChartValues } from './helpers';
 
 import { ChartContainer, Container, RowContainer } from './styles';
 
 export const ChartJs = () => {
-  const { userId } = useGlobal();
+  const { userId } = useParams();
   const {
     handleCategoryValues,
     handleCategoryAverage,

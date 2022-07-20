@@ -1,14 +1,15 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Checkbox } from '@chakra-ui/react';
+import { useHistory, useParams } from 'react-router-dom';
 import { Typography, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
-import { useGlobal } from '~/hooks/globalProvider';
 
 export default function PredominanciaCerebral() {
+  const history = useHistory();
   const [choicesArray, setChoicesArray] = React.useState([]);
-  const { userId } = useGlobal();
+  const { userId } = useParams();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -54,7 +55,7 @@ export default function PredominanciaCerebral() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    });
+    }).then(() => history.push(`/gestaoTempo/${userId}`));
   };
 
   const renderChoice = (choice, item) => (

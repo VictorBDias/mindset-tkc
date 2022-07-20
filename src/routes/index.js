@@ -17,7 +17,6 @@ import Conexao from '~/pages/TkcForm/pages/conexao';
 import Autorresponsabilidade from '~/pages/TkcForm/pages/autorresponsabilidade';
 import Direcional from '~/pages/TkcForm/pages/direcional';
 import { GenerateTokenPage } from '~/pages/admin/GenerateToken';
-import { Feedback } from '~/pages/Feedback';
 import { ChartJs } from '~/pages/ChartJs';
 
 export default function Routes() {
@@ -31,28 +30,52 @@ export default function Routes() {
             {localStorageToken && (
               <>
                 <Route path="/instrucoes" exact component={Instructions} />
-                <Route path="/impulsores" exact component={Impulsores} />
-                <Route path="/motivadores" exact component={Motivadores} />
-                <Route path="/assertividade" exact component={Assertividade} />
                 <Route
-                  path="/analiseGerencial"
+                  path="/impulsores/:userId"
+                  exact
+                  component={Impulsores}
+                />
+                <Route
+                  path="/motivadores/:userId"
+                  exact
+                  component={Motivadores}
+                />
+                <Route
+                  path="/assertividade/:userId"
+                  exact
+                  component={Assertividade}
+                />
+                <Route
+                  path="/analiseGerencial/:userId"
                   exact
                   component={AnaliseGerencial}
                 />
                 <Route
-                  path="/predominanciaCerebral"
+                  path="/predominanciaCerebral/:userId"
                   exact
                   component={PredominanciaCerebral}
                 />
-                <Route path="/gestaoTempo" exact component={GestaoTempo} />
-                <Route path="/intensidade" exact component={Intensidade} />
-                <Route path="/conexao" exact component={Conexao} />
                 <Route
-                  path="/autorresponsabilidade"
+                  path="/gestaoTempo/:userId"
+                  exact
+                  component={GestaoTempo}
+                />
+                <Route
+                  path="/intensidade/:userId"
+                  exact
+                  component={Intensidade}
+                />
+                <Route path="/conexao/:userId" exact component={Conexao} />
+                <Route
+                  path="/autorresponsabilidade/:userId"
                   exact
                   component={Autorresponsabilidade}
                 />
-                <Route path="/direcional" exact component={Direcional} />
+                <Route
+                  path="/direcional/:userId"
+                  exact
+                  component={Direcional}
+                />
               </>
             )}
             <Route
@@ -60,7 +83,7 @@ export default function Routes() {
               exact
               component={GenerateTokenPage}
             />
-            <Route path="/feedback" exact component={ChartJs} />
+            <Route path="/feedback/:userId" exact component={ChartJs} />
           </GlobalProvider>
         </ChakraProvider>
       </Switch>

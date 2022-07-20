@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { useGlobal } from '~/hooks/globalProvider';
+import { useHistory, useParams } from 'react-router-dom';
 import { Typography, InputBox, Button } from '~/components/atoms';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function GestaoTempo() {
   const history = useHistory();
-  const { userId } = useGlobal();
+  const { userId } = useParams();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -69,7 +68,7 @@ export default function GestaoTempo() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    }).then(() => history.push('/intensidade'));
+    }).then(() => history.push(`/intensidade/${userId}`));
   };
 
   const onSubmit = data => handleFormatAnswerData(data);

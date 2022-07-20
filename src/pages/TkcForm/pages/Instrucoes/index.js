@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 // CUSTOM IMPORTS
 import { Formik, Form } from 'formik';
@@ -23,7 +23,7 @@ function Instrucoes() {
       });
       localStorage.setItem('userId', response.data.id);
       notifySuccess();
-      history.push('/impulsores');
+      history.push(`/impulsores/${response.data.id}`);
       return response;
     } catch (e) {
       console.log(e);

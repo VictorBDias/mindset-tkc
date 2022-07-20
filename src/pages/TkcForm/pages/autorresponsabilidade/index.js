@@ -1,14 +1,13 @@
 import React from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import { useGlobal } from '~/hooks/globalProvider';
+import { useHistory, useParams } from 'react-router-dom';
 import { Typography, InputBox, Button } from '~/components/atoms';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 
 export default function Autorresponsabilidade() {
   const history = useHistory();
-  const { userId } = useGlobal();
+  const { userId } = useParams();
   const { control, handleSubmit } = useForm({});
   const [questions, setQuestions] = React.useState([]);
 
@@ -73,7 +72,7 @@ export default function Autorresponsabilidade() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    }).then(() => history.push('/direcional'));
+    }).then(() => history.push(`/direcional/${userId}`));
   };
 
   const onSubmit = data => handleFormatAnswerData(data);
@@ -90,7 +89,7 @@ export default function Autorresponsabilidade() {
             marginBottom: '24px',
           }}
         >
-          Questionário Autorresponsabilidade
+          Diagnóstico de Autorresponsabilidade
         </Typography>
         <Typography
           variant="regular"

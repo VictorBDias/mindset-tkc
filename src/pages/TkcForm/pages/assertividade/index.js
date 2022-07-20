@@ -1,15 +1,14 @@
 import React from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Checkbox } from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { Typography, Button } from '../../../../components/atoms';
 import { QuestionContainer, ButtonsContainer, Container } from './styles';
 import { answerQuestionsAPI, listQuestionsAPI } from '../../apis';
-import { useGlobal } from '~/hooks/globalProvider';
 
 export default function Assertividade() {
   const history = useHistory();
-  const { userId } = useGlobal();
+  const { userId } = useParams();
   const { control, handleSubmit } = useForm({});
 
   const [choicesArray, setChoicesArray] = React.useState([]);
@@ -57,7 +56,7 @@ export default function Assertividade() {
     answerQuestionsAPI({
       userId,
       choices: choicesArray,
-    }).then(() => history.push('/analiseGerencial'));
+    }).then(() => history.push(`/analiseGerencial/${userId}`));
   };
 
   const renderField = item => {
