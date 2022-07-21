@@ -10,7 +10,7 @@ import {
   DoubleVerticalChart,
 } from '~/components/charts';
 
-import { getUserFeedbackAPI } from './apis';
+import { getUserFeedbackAPI, sendEmailAPI } from './apis';
 import { useChartValues } from './helpers';
 
 import { ChartContainer, Container, RowContainer } from './styles';
@@ -28,6 +28,10 @@ export const ChartJs = () => {
   const [motivadores, setMotivadores] = useState();
   const [assertividade, setAssertividade] = useState();
   const [analiseGerencial, setAnaliseGerencial] = useState();
+
+  useEffect(() => {
+    sendEmailAPI({ userId });
+  }, [userId]);
 
   useEffect(() => {
     if (userId)
